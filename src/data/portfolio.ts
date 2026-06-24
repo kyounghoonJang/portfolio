@@ -121,3 +121,110 @@ export const education: Education[] = [
     period: "2017.03 – 2021.02",
   },
 ];
+
+// 오픈소스 기여 — 프로젝트별로 묶어서 표시합니다.
+export type OpenSourcePR = { title: string; url: string; merged: boolean };
+export type OpenSource = {
+  project: string;
+  projectUrl: string;
+  // 프로젝트가 뭔지 한 줄 설명
+  blurb: string;
+  tags: string[];
+  prs: OpenSourcePR[];
+};
+
+export const openSource: OpenSource[] = [
+  {
+    project: "Podman",
+    projectUrl: "https://github.com/podman-container-tools/podman",
+    blurb: "Red Hat의 데몬리스 OCI 컨테이너 엔진 (⭐32k)",
+    tags: ["Go", "Containers", "CLI"],
+    prs: [
+      {
+        title: "volume prune: add dry-run support",
+        url: "https://github.com/podman-container-tools/podman/pull/28673",
+        merged: true,
+      },
+      {
+        title: "add --ignore flag to network rm",
+        url: "https://github.com/podman-container-tools/podman/pull/28391",
+        merged: true,
+      },
+      {
+        title:
+          "print client info from `podman version` when the server is unavailable",
+        url: "https://github.com/podman-container-tools/podman/pull/28265",
+        merged: true,
+      },
+    ],
+  },
+  {
+    project: "OpenBao",
+    projectUrl: "https://github.com/openbao/openbao",
+    blurb: "HashiCorp Vault 기반 오픈소스 시크릿 관리 (Linux Foundation)",
+    tags: ["Go", "Secrets", "Security"],
+    prs: [
+      {
+        title: "core: add metrics_only / disallow_metrics listener options",
+        url: "https://github.com/openbao/openbao/pull/1834",
+        merged: true,
+      },
+      {
+        title: "valkey: support connection_url for configuration",
+        url: "https://github.com/openbao/openbao/pull/1923",
+        merged: true,
+      },
+      {
+        title: "valkey: correctly parse creation_statements as a string array",
+        url: "https://github.com/openbao/openbao/pull/1959",
+        merged: true,
+      },
+      {
+        title: "add BAO_{AGENT,PROXY,MIGRATE}_CONFIG_PATH env variables",
+        url: "https://github.com/openbao/openbao/pull/2153",
+        merged: true,
+      },
+      {
+        title: "remove dependency on github.com/asaskevich/govalidator",
+        url: "https://github.com/openbao/openbao/pull/1868",
+        merged: true,
+      },
+    ],
+  },
+  {
+    project: "Cilium",
+    projectUrl: "https://github.com/cilium/cilium",
+    blurb: "eBPF 기반 쿠버네티스 네트워킹·보안 (CNCF Graduated)",
+    tags: ["Go", "eBPF", "Kubernetes"],
+    prs: [
+      {
+        title: "api: add CiliumPodIPPool v2 API with pool fields",
+        url: "https://github.com/cilium/cilium/pull/44383",
+        merged: true,
+      },
+    ],
+  },
+  {
+    project: "floci",
+    projectUrl: "https://github.com/floci-io/floci",
+    blurb: "가볍고 무료인 AWS 로컬 에뮬레이터 (LocalStack 대안)",
+    tags: ["Go", "AWS", "Cloud"],
+    prs: [
+      {
+        title: "kms: add RotateKeyOnDemand support",
+        url: "https://github.com/floci-io/floci/pull/990",
+        merged: true,
+      },
+      {
+        title: "kms: handle RotateKeyOnDemand rotation limit",
+        url: "https://github.com/floci-io/floci/pull/1042",
+        merged: true,
+      },
+      {
+        title: "ec2: add NAT gateway create and describe support",
+        url: "https://github.com/floci-io/floci/pull/1227",
+        merged: false,
+      },
+    ],
+  },
+];
