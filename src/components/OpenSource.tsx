@@ -38,7 +38,7 @@ export function OpenSource() {
 
           <p className="mt-1 text-sm text-muted">{item.blurb}</p>
 
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-4 space-y-2.5">
             {item.prs.map((pr) => (
               <li key={pr.url} className="flex items-start gap-2.5 text-sm">
                 <span
@@ -50,17 +50,41 @@ export function OpenSource() {
                 >
                   {pr.merged ? "MERGED" : "OPEN"}
                 </span>
-                <a
-                  href={pr.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="leading-relaxed text-muted transition-colors hover:text-foreground"
-                >
-                  {pr.title}
-                </a>
+                <span className="min-w-0">
+                  <a
+                    href={pr.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="leading-relaxed text-foreground transition-colors hover:text-accent"
+                  >
+                    {pr.title}
+                  </a>
+                  {pr.note && (
+                    <span className="mt-0.5 block text-[13px] leading-relaxed text-muted">
+                      {pr.note}
+                    </span>
+                  )}
+                </span>
               </li>
             ))}
           </ul>
+
+          {item.relatedPosts && item.relatedPosts.length > 0 && (
+            <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-border pt-3 text-xs">
+              <span className="text-muted">관련 글</span>
+              {item.relatedPosts.map((post) => (
+                <a
+                  key={post.url}
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  {post.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
         </motion.div>
       ))}
     </div>

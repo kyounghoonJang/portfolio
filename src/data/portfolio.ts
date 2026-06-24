@@ -181,7 +181,13 @@ export const certifications: Certification[] = [
 ];
 
 // 오픈소스 기여 — 프로젝트별로 묶어서 표시합니다.
-export type OpenSourcePR = { title: string; url: string; merged: boolean };
+export type OpenSourcePR = {
+  title: string;
+  url: string;
+  merged: boolean;
+  // 핵심 기여에만 한 줄 설명을 붙이면 임팩트가 살아납니다. (선택)
+  note?: string;
+};
 export type OpenSource = {
   project: string;
   projectUrl: string;
@@ -189,6 +195,8 @@ export type OpenSource = {
   blurb: string;
   tags: string[];
   prs: OpenSourcePR[];
+  // 이 프로젝트와 연결되는 블로그 글 등 (선택)
+  relatedPosts?: { label: string; url: string }[];
 };
 
 export const openSource: OpenSource[] = [
@@ -202,17 +210,29 @@ export const openSource: OpenSource[] = [
         title: "volume prune: add dry-run support",
         url: "https://github.com/podman-container-tools/podman/pull/28673",
         merged: true,
+        note: "삭제 전 어떤 볼륨이 정리될지 미리 보여주는 --dry-run 옵션 추가 (local·remote 모두 지원).",
       },
       {
         title: "add --ignore flag to network rm",
         url: "https://github.com/podman-container-tools/podman/pull/28391",
         merged: true,
+        note: "존재하지 않는 네트워크 삭제 시 exit 1 대신 success 반환 — Docker CLI와의 동작 일관성 확보 (#28363).",
       },
       {
         title:
           "print client info from `podman version` when the server is unavailable",
         url: "https://github.com/podman-container-tools/podman/pull/28265",
         merged: true,
+      },
+    ],
+    relatedPosts: [
+      {
+        label: "Deep Dive 0편: Podman 아키텍처",
+        url: "https://codingjang.tistory.com/89",
+      },
+      {
+        label: "Deep Dive 1편: podman run 은 어떻게 동작할까?",
+        url: "https://codingjang.tistory.com/90",
       },
     ],
   },
@@ -226,6 +246,7 @@ export const openSource: OpenSource[] = [
         title: "core: add metrics_only / disallow_metrics listener options",
         url: "https://github.com/openbao/openbao/pull/1834",
         merged: true,
+        note: "리스너별 메트릭 노출 제어 옵션 추가 — 모니터링 전용 포트를 분리해 다른 API 노출 없이 메트릭만 제공 (보안 강화, #1704).",
       },
       {
         title: "valkey: support connection_url for configuration",
@@ -259,6 +280,7 @@ export const openSource: OpenSource[] = [
         title: "api: add CiliumPodIPPool v2 API with pool fields",
         url: "https://github.com/cilium/cilium/pull/44383",
         merged: true,
+        note: "Multi-Pool IPAM을 위한 CiliumPodIPPool v2 API 신규 추가 — CRD 스키마·검증·codegen 포함 (+1,000여 줄, 16개 파일).",
       },
     ],
   },
