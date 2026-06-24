@@ -4,6 +4,7 @@ import { Section } from "@/components/Section";
 import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
 import { OpenSource } from "@/components/OpenSource";
+import { Certifications } from "@/components/Certifications";
 import {
   profile,
   skills,
@@ -77,6 +78,10 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </Section>
+
+        <Section id="certifications" title="Certifications">
+          <Certifications />
         </Section>
 
         <Section id="contact" title="Contact">

@@ -12,6 +12,7 @@ const links = [
   { href: "side", label: "사이드" },
   { href: "skills", label: "기술" },
   { href: "education", label: "학력" },
+  { href: "certifications", label: "자격증" },
   { href: "contact", label: "연락처" },
 ];
 

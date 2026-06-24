@@ -1,12 +1,13 @@
 // ============================================================
 //  이 파일만 고치면 포트폴리오 내용이 전부 바뀝니다.
-//  (이름, 소개, 스킬, 경력, 프로젝트, 사이드 프로젝트, 학력, 연락처)
+//  (이름, 소개, 스킬, 경력, 오픈소스, 프로젝트, 학력, 자격증, 연락처)
 // ============================================================
 
 export const profile = {
   name: "장경훈",
-  role: "Frontend Developer",
-  tagline: "사용자 경험과 비즈니스 임팩트를 함께 고민하는 개발자입니다.",
+  role: "Infrastructure Engineer",
+  tagline:
+    "컨테이너·쿠버네티스·클라우드 인프라를 다루며, 오픈소스로 기여하는 인프라 엔지니어입니다.",
   location: "Seoul, Korea",
   email: "owndill19@gmail.com",
   // 비워두면 해당 버튼이 표시되지 않습니다.
@@ -14,18 +15,28 @@ export const profile = {
   linkedin: "",
   resumeUrl: "", // PDF 이력서 링크 (예: "/resume.pdf")
   about: [
-    "여기에 본인 소개를 적으세요. 어떤 문제를 즐겨 푸는지, 어떤 기술 스택을 주로 쓰는지, 어떤 협업 스타일을 가졌는지 등을 2~3문단으로 풀어내면 좋습니다.",
-    "최근에는 어떤 일에 관심이 있는지, 앞으로 어떤 개발자가 되고 싶은지로 마무리하면 인상이 좋습니다.",
+    "컨테이너, 쿠버네티스, 클라우드 네이티브 인프라에 관심이 많은 인프라 엔지니어입니다. Podman, Cilium, OpenBao 등 핵심 오픈소스 프로젝트에 직접 기여하며 대규모 코드베이스를 읽고 협업하는 경험을 쌓아왔습니다.",
+    "여기에 본인을 더 구체적으로 소개하세요 — 어떤 인프라 문제를 즐겨 풀고, 어떤 스택(쿠버네티스/IaC/관측성 등)에 강하며, 앞으로 어떤 인프라 엔지니어가 되고 싶은지로 마무리하면 인상이 좋습니다.",
   ],
 };
 
 export type Skill = { category: string; items: string[] };
 
+// ⚠️ 실제로 다룰 수 있는 것만 남기고 자유롭게 수정하세요.
 export const skills: Skill[] = [
-  { category: "Languages", items: ["TypeScript", "JavaScript", "Python"] },
-  { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Zustand"] },
-  { category: "Backend", items: ["Node.js", "Express", "PostgreSQL"] },
-  { category: "Tools", items: ["Git", "Docker", "Vercel", "Figma"] },
+  { category: "Languages", items: ["Go", "Python", "Bash", "TypeScript"] },
+  {
+    category: "Containers / Orchestration",
+    items: ["Kubernetes", "Docker", "Podman", "Helm"],
+  },
+  {
+    category: "Cloud / IaC",
+    items: ["AWS", "Terraform", "Cilium", "Linux"],
+  },
+  {
+    category: "Observability / CI·CD",
+    items: ["Prometheus", "Grafana", "GitHub Actions", "ArgoCD"],
+  },
 ];
 
 export type Experience = {
@@ -119,6 +130,29 @@ export const education: Education[] = [
     school: "OO대학교",
     degree: "전공 / 학위",
     period: "2017.03 – 2021.02",
+  },
+];
+
+export type Certification = {
+  name: string;
+  issuer: string;
+  date: string; // 취득 시기 (예: "2024.08")
+  url?: string; // 자격증 검증 링크 (Credly 등). 없으면 링크 미표시.
+};
+
+// ⚠️ 실제 보유한 자격증으로 교체하세요. (아래는 인프라 직군에서 흔한 예시)
+export const certifications: Certification[] = [
+  {
+    name: "CKA: Certified Kubernetes Administrator",
+    issuer: "CNCF / Linux Foundation",
+    date: "2025.00",
+    url: "",
+  },
+  {
+    name: "AWS Certified Solutions Architect – Associate",
+    issuer: "Amazon Web Services",
+    date: "2024.00",
+    url: "",
   },
 ];
 
