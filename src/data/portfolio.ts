@@ -140,18 +140,41 @@ export type Certification = {
   url?: string; // 자격증 검증 링크 (Credly 등). 없으면 링크 미표시.
 };
 
-// ⚠️ 실제 보유한 자격증으로 교체하세요. (아래는 인프라 직군에서 흔한 예시)
 export const certifications: Certification[] = [
   {
-    name: "CKA: Certified Kubernetes Administrator",
-    issuer: "CNCF / Linux Foundation",
-    date: "2025.00",
+    name: "AWS Certified Data Engineer – Associate",
+    issuer: "Amazon Web Services",
+    date: "2024.11",
     url: "",
   },
   {
     name: "AWS Certified Solutions Architect – Associate",
     issuer: "Amazon Web Services",
-    date: "2024.00",
+    date: "2024.03",
+    url: "",
+  },
+  {
+    name: "SQL 개발자 (SQLD)",
+    issuer: "한국데이터산업진흥원",
+    date: "2022.12",
+    url: "",
+  },
+  {
+    name: "데이터분석 준전문가 (ADsP)",
+    issuer: "한국데이터산업진흥원",
+    date: "2022.09",
+    url: "",
+  },
+  {
+    name: "네트워크관리사 2급",
+    issuer: "한국정보통신자격협회 (ICQA)",
+    date: "2020.05",
+    url: "",
+  },
+  {
+    name: "리눅스마스터 2급",
+    issuer: "한국정보통신진흥협회 (KAIT)",
+    date: "2019.04",
     url: "",
   },
 ];
