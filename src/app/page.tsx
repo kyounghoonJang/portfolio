@@ -5,6 +5,7 @@ import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
 import { OpenSource } from "@/components/OpenSource";
 import { Certifications } from "@/components/Certifications";
+import { Blog } from "@/components/Blog";
 import {
   profile,
   skills,
@@ -62,6 +63,10 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </Section>
+
+        <Section id="blog" title="Blog">
+          <Blog />
         </Section>
 
         <Section id="education" title="Education">

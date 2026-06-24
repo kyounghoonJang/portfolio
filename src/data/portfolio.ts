@@ -13,6 +13,7 @@ export const profile = {
   // 비워두면 해당 버튼이 표시되지 않습니다.
   github: "https://github.com/kyounghoonJang",
   linkedin: "",
+  blog: "https://codingjang.tistory.com/", // 비워두면 블로그 섹션이 숨겨집니다.
   resumeUrl: "", // PDF 이력서 링크 (예: "/resume.pdf")
   about: [
     "컨테이너, 쿠버네티스, 클라우드 네이티브 인프라에 관심이 많은 인프라 엔지니어입니다. Podman, Cilium, OpenBao 등 핵심 오픈소스 프로젝트에 직접 기여하며 대규모 코드베이스를 읽고 협업하는 경험을 쌓아왔습니다.",
