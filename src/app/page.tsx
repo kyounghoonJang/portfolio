@@ -2,7 +2,14 @@ import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Section } from "@/components/Section";
 import { Projects } from "@/components/Projects";
-import { profile, skills, experiences } from "@/data/portfolio";
+import { Experience } from "@/components/Experience";
+import {
+  profile,
+  skills,
+  projects,
+  sideProjects,
+  education,
+} from "@/data/portfolio";
 
 export default function Home() {
   return (
@@ -19,6 +26,18 @@ export default function Home() {
           </div>
         </Section>
 
+        <Section id="experience" title="Experience">
+          <Experience />
+        </Section>
+
+        <Section id="projects" title="Projects">
+          <Projects items={projects} />
+        </Section>
+
+        <Section id="side" title="Side Projects">
+          <Projects items={sideProjects} />
+        </Section>
+
         <Section id="skills" title="Skills">
           <div className="grid gap-6 sm:grid-cols-2">
             {skills.map((group) => (
@@ -28,7 +47,7 @@ export default function Home() {
                   {group.items.map((item) => (
                     <li
                       key={item}
-                      className="rounded-md bg-card px-2.5 py-1 font-mono text-xs text-muted"
+                      className="rounded-md bg-card px-2.5 py-1 font-mono text-xs text-muted ring-1 ring-border"
                     >
                       {item}
                     </li>
@@ -39,32 +58,20 @@ export default function Home() {
           </div>
         </Section>
 
-        <Section id="experience" title="Experience">
-          <div className="space-y-8">
-            {experiences.map((exp) => (
-              <div key={exp.company + exp.period} className="sm:flex sm:gap-8">
-                <p className="mb-1 shrink-0 font-mono text-sm text-muted sm:w-40">
-                  {exp.period}
+        <Section id="education" title="Education">
+          <div className="space-y-4">
+            {education.map((edu) => (
+              <div key={edu.school} className="sm:flex sm:gap-8">
+                <p className="shrink-0 font-mono text-sm text-muted sm:w-36">
+                  {edu.period}
                 </p>
                 <div>
-                  <h3 className="font-semibold">
-                    {exp.role}{" "}
-                    <span className="text-muted">· {exp.company}</span>
-                  </h3>
-                  <p className="mt-1 text-sm text-muted">{exp.description}</p>
-                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-muted">
-                    {exp.highlights.map((h, i) => (
-                      <li key={i}>{h}</li>
-                    ))}
-                  </ul>
+                  <h3 className="font-semibold">{edu.school}</h3>
+                  <p className="text-sm text-muted">{edu.degree}</p>
                 </div>
               </div>
             ))}
           </div>
-        </Section>
-
-        <Section id="projects" title="Projects">
-          <Projects />
         </Section>
 
         <Section id="contact" title="Contact">
@@ -72,7 +79,10 @@ export default function Home() {
             새로운 기회나 협업 제안은 언제든 환영합니다.
           </p>
           <div className="mt-4 flex flex-wrap gap-4 text-sm font-medium">
-            <a href={`mailto:${profile.email}`} className="text-accent hover:underline">
+            <a
+              href={`mailto:${profile.email}`}
+              className="text-accent hover:underline"
+            >
               {profile.email}
             </a>
             {profile.github && (

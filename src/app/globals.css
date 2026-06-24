@@ -1,23 +1,26 @@
 @import "tailwindcss";
 
+/* .dark 클래스 기준으로 다크모드 적용 (수동 토글) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #18181b;
   --muted: #71717a;
   --border: #e4e4e7;
-  --card: #fafafa;
+  --card: #ffffff;
+  --card-hover: #fafafa;
   --accent: #2563eb;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --muted: #a1a1aa;
-    --border: #27272a;
-    --card: #18181b;
-    --accent: #60a5fa;
-  }
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --muted: #a1a1aa;
+  --border: #27272a;
+  --card: #131316;
+  --card-hover: #1c1c20;
+  --accent: #60a5fa;
 }
 
 @theme inline {
@@ -26,6 +29,7 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
   --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -39,4 +43,18 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 은은한 배경 그라데이션 (히어로 영역용) */
+.hero-glow {
+  background: radial-gradient(
+    600px circle at 50% 0%,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 70%
+  );
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
 }

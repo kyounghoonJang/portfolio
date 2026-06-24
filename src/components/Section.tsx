@@ -1,3 +1,5 @@
+import { Reveal } from "./Reveal";
+
 export function Section({
   id,
   title,
@@ -9,10 +11,12 @@ export function Section({
 }) {
   return (
     <section id={id} className="scroll-mt-20 border-t border-border py-16">
-      <h2 className="mb-8 text-sm font-mono uppercase tracking-widest text-muted">
-        {title}
-      </h2>
-      {children}
+      <Reveal>
+        <h2 className="mb-8 font-mono text-sm uppercase tracking-widest text-muted">
+          {title}
+        </h2>
+      </Reveal>
+      <Reveal delay={0.05}>{children}</Reveal>
     </section>
   );
 }

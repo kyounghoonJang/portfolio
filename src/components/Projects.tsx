@@ -1,15 +1,23 @@
-import Image from "next/image";
-import { projects } from "@/data/portfolio";
+"use client";
 
-export function Projects() {
+import Image from "next/image";
+import { motion } from "motion/react";
+import type { Project } from "@/data/portfolio";
+
+export function Projects({ items }: { items: Project[] }) {
   return (
     <div className="grid gap-6 sm:grid-cols-2">
-      {projects.map((project) => (
-        <article
+      {items.map((project, i) => (
+        <motion.article
           key={project.title}
-          className="flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-colors hover:border-accent"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.45, delay: i * 0.08 }}
+          whileHover={{ y: -4 }}
+          className="flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-colors hover:border-accent"
         >
-          <div className="relative aspect-video w-full bg-border/40">
+          <div className="relative aspect-video w-full overflow-hidden bg-card-hover">
             {project.image ? (
               <Image
                 src={project.image}
@@ -65,7 +73,7 @@ export function Projects() {
               )}
             </div>
           </div>
-        </article>
+        </motion.article>
       ))}
     </div>
   );

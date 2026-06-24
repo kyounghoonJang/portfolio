@@ -1,16 +1,16 @@
 // ============================================================
 //  이 파일만 고치면 포트폴리오 내용이 전부 바뀝니다.
-//  (이름, 소개, 스킬, 경력, 프로젝트, 연락처)
+//  (이름, 소개, 스킬, 경력, 프로젝트, 사이드 프로젝트, 학력, 연락처)
 // ============================================================
 
 export const profile = {
   name: "장경훈",
-  role: "Frontend / Software Engineer",
-  tagline: "사용자에게 가치를 주는 제품을 만드는 개발자입니다.",
+  role: "Frontend Developer",
+  tagline: "사용자 경험과 비즈니스 임팩트를 함께 고민하는 개발자입니다.",
   location: "Seoul, Korea",
   email: "owndill19@gmail.com",
   // 비워두면 해당 버튼이 표시되지 않습니다.
-  github: "https://github.com/your-username",
+  github: "https://github.com/kyounghoonJang",
   linkedin: "",
   resumeUrl: "", // PDF 이력서 링크 (예: "/resume.pdf")
   about: [
@@ -23,7 +23,7 @@ export type Skill = { category: string; items: string[] };
 
 export const skills: Skill[] = [
   { category: "Languages", items: ["TypeScript", "JavaScript", "Python"] },
-  { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS"] },
+  { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Zustand"] },
   { category: "Backend", items: ["Node.js", "Express", "PostgreSQL"] },
   { category: "Tools", items: ["Git", "Docker", "Vercel", "Figma"] },
 ];
@@ -32,27 +32,38 @@ export type Experience = {
   company: string;
   role: string;
   period: string;
-  description: string;
-  highlights: string[];
+  summary: string;
+  // 핵심 성과 — 수치를 강조하면 좋습니다. value가 크게 표시됩니다.
+  metrics?: { value: string; label: string }[];
+  // "상세 내용 보기"를 누르면 펼쳐지는 내용
+  details: string[];
+  tags?: string[];
 };
 
 export const experiences: Experience[] = [
   {
     company: "회사 / 팀 이름",
-    role: "직무 (예: Frontend Engineer)",
+    role: "Frontend Engineer",
     period: "2023.01 – 현재",
-    description: "이 조직에서 맡았던 역할과 책임을 한 줄로 요약합니다.",
-    highlights: [
-      "구체적인 성과를 숫자와 함께 적으면 좋습니다 (예: 페이지 로드 40% 단축).",
-      "어떤 기술/방법으로 어떤 문제를 해결했는지.",
+    summary: "이 조직에서 맡았던 역할과 책임을 한 줄로 요약합니다.",
+    metrics: [
+      { value: "40%", label: "페이지 로드 단축" },
+      { value: "18만→20만", label: "MAU 증가" },
     ],
+    details: [
+      "구체적인 성과를 숫자와 함께 적으면 좋습니다.",
+      "어떤 기술/방법으로 어떤 문제를 해결했는지 적습니다.",
+      "팀에서 주도한 일이 있다면 강조하세요.",
+    ],
+    tags: ["React", "Next.js", "TypeScript"],
   },
   {
     company: "이전 회사 / 프로젝트",
-    role: "직무",
+    role: "Frontend Developer",
     period: "2021.06 – 2022.12",
-    description: "또 다른 경력을 추가할 수 있습니다.",
-    highlights: ["주요 성과 1", "주요 성과 2"],
+    summary: "또 다른 경력을 추가할 수 있습니다.",
+    details: ["주요 업무 1", "주요 업무 2"],
+    tags: ["React", "JavaScript"],
   },
 ];
 
@@ -60,10 +71,9 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  // 비워두면 해당 링크 버튼이 표시되지 않습니다.
   liveUrl?: string;
   repoUrl?: string;
-  // public/ 폴더 기준 이미지 경로 (예: "/projects/my-app.png"). 없으면 placeholder 표시.
+  // public/ 폴더 기준 경로 (예: "/projects/app.gif" 또는 ".png"). 없으면 placeholder.
   image?: string;
 };
 
@@ -74,7 +84,7 @@ export const projects: Project[] = [
       "이 프로젝트가 무엇이고, 어떤 문제를 풀었으며, 내가 어떤 부분을 담당했는지 2~3문장으로 설명합니다.",
     tags: ["Next.js", "TypeScript", "Tailwind"],
     liveUrl: "https://example.com",
-    repoUrl: "https://github.com/your-username/project-a",
+    repoUrl: "https://github.com/kyounghoonJang/project-a",
     image: "",
   },
   {
@@ -82,14 +92,32 @@ export const projects: Project[] = [
     description:
       "두 번째 프로젝트 설명. 사용한 기술과 결과(사용자 수, 성능 개선 등)를 적어주세요.",
     tags: ["React", "Node.js", "PostgreSQL"],
-    repoUrl: "https://github.com/your-username/project-b",
+    repoUrl: "https://github.com/kyounghoonJang/project-b",
     image: "",
   },
+];
+
+// 사이드 프로젝트 (개인/토이 프로젝트)
+export const sideProjects: Project[] = [
   {
-    title: "프로젝트 이름 C",
-    description: "세 번째 프로젝트 설명.",
-    tags: ["Python", "FastAPI"],
-    liveUrl: "https://example.com",
+    title: "사이드 프로젝트",
+    description: "개인적으로 만든 토이 프로젝트나 실험적인 작업물을 적습니다.",
+    tags: ["React", "Vite"],
+    repoUrl: "https://github.com/kyounghoonJang/side-project",
     image: "",
+  },
+];
+
+export type Education = {
+  school: string;
+  degree: string;
+  period: string;
+};
+
+export const education: Education[] = [
+  {
+    school: "OO대학교",
+    degree: "전공 / 학위",
+    period: "2017.03 – 2021.02",
   },
 ];
