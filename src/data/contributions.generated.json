@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-25T12:02:16.694Z",
+  "generatedAt": "2026-06-25T12:18:33.508Z",
   "username": "kyounghoonJang",
   "starThreshold": 5000,
   "projects": [
@@ -110,7 +110,7 @@
     {
       "repo": "cilium/cilium",
       "repoUrl": "https://github.com/cilium/cilium",
-      "stars": 24593,
+      "stars": 24594,
       "description": "eBPF-based Networking, Security, and Observability",
       "language": "Go",
       "prs": [
@@ -179,7 +179,7 @@
     {
       "repo": "openbao/openbao",
       "repoUrl": "https://github.com/openbao/openbao",
-      "stars": 6455,
+      "stars": 6456,
       "description": "OpenBao is a software solution to manage, store, and distribute sensitive data including secrets, certificates, and keys.",
       "language": "Go",
       "prs": [
