@@ -128,9 +128,9 @@ export type Education = {
 
 export const education: Education[] = [
   {
-    school: "OO대학교",
-    degree: "전공 / 학위",
-    period: "2017.03 – 2021.02",
+    school: "세종대학교",
+    degree: "데이터사이언스",
+    period: "2019.03 – 2025.02",
   },
 ];
 

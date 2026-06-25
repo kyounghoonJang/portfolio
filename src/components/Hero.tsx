@@ -41,20 +41,8 @@ export function Hero() {
           {profile.tagline}
         </motion.p>
 
-        <motion.div variants={item} className="mt-9 flex flex-wrap gap-3">
-          <a
-            href="#projects"
-            className="rounded-md bg-accent px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
-          >
-            프로젝트 보기
-          </a>
-          <a
-            href={`mailto:${profile.email}`}
-            className="rounded-md border border-border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-card-hover"
-          >
-            연락하기
-          </a>
-          {profile.resumeUrl && (
+        {profile.resumeUrl && (
+          <motion.div variants={item} className="mt-9 flex flex-wrap gap-3">
             <a
               href={profile.resumeUrl}
               target="_blank"
@@ -63,8 +51,8 @@ export function Hero() {
             >
               이력서 (PDF)
             </a>
-          )}
-        </motion.div>
+          </motion.div>
+        )}
       </motion.div>
     </section>
   );

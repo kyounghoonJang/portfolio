@@ -88,40 +88,6 @@ export default function Home() {
         <Section id="certifications" title="Certifications">
           <Certifications />
         </Section>
-
-        <Section id="contact" title="Contact">
-          <p className="text-base text-muted">
-            새로운 기회나 협업 제안은 언제든 환영합니다.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-4 text-sm font-medium">
-            <a
-              href={`mailto:${profile.email}`}
-              className="text-accent hover:underline"
-            >
-              {profile.email}
-            </a>
-            {profile.github && (
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline"
-              >
-                GitHub
-              </a>
-            )}
-            {profile.linkedin && (
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline"
-              >
-                LinkedIn
-              </a>
-            )}
-          </div>
-        </Section>
       </main>
 
       <footer className="border-t border-border">
