@@ -264,11 +264,6 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
     blurb: "가볍고 무료인 AWS 로컬 에뮬레이터 (LocalStack 대안)",
     tags: ["AWS", "Cloud", "Java"],
   },
-  "anchore/syft": {
-    displayName: "Syft",
-    blurb: "컨테이너 이미지·파일시스템에서 SBOM을 생성하는 도구 (Anchore)",
-    tags: ["Go", "SBOM", "Security"],
-  },
   "openbao/openbao": {
     displayName: "OpenBao",
     blurb: "HashiCorp Vault 기반 오픈소스 시크릿 관리 (Linux Foundation)",

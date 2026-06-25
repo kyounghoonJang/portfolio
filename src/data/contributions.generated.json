@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-25T12:18:33.508Z",
+  "generatedAt": "2026-06-25T12:50:00.148Z",
   "username": "kyounghoonJang",
   "starThreshold": 5000,
   "projects": [
@@ -110,7 +110,7 @@
     {
       "repo": "cilium/cilium",
       "repoUrl": "https://github.com/cilium/cilium",
-      "stars": 24594,
+      "stars": 24595,
       "description": "eBPF-based Networking, Security, and Observability",
       "language": "Go",
       "prs": [
@@ -133,7 +133,7 @@
     {
       "repo": "floci-io/floci",
       "repoUrl": "https://github.com/floci-io/floci",
-      "stars": 14425,
+      "stars": 14426,
       "description": "Light, fluffy, and always free - The AWS Local Emulator alternative",
       "language": "Java",
       "prs": [
@@ -157,22 +157,6 @@
           "merged": false,
           "state": "open",
           "createdAt": "2026-06-08T06:33:08Z"
-        }
-      ]
-    },
-    {
-      "repo": "anchore/syft",
-      "repoUrl": "https://github.com/anchore/syft",
-      "stars": 9158,
-      "description": "CLI tool and library for generating a Software Bill of Materials from container images and filesystems",
-      "language": "Go",
-      "prs": [
-        {
-          "title": "feat(java): Add support for .far (Feature Archive) files",
-          "url": "https://github.com/anchore/syft/pull/4193",
-          "merged": true,
-          "state": "merged",
-          "createdAt": "2025-09-07T13:19:00Z"
         }
       ]
     },

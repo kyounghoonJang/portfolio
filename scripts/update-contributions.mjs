@@ -14,6 +14,11 @@ import { dirname, join } from "node:path";
 const USERNAME = "kyounghoonJang";
 const STAR_THRESHOLD = 5000;
 
+// 스타가 충분해도 목록에서 빼고 싶은 레포 (full name). 여기에 추가만 하면 됩니다.
+const EXCLUDE_REPOS = new Set([
+  "anchore/syft",
+]);
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dirname, "..", "src", "data", "contributions.generated.json");
 
@@ -81,6 +86,7 @@ async function main() {
 
     const repo = await getRepo(pr.repository_url);
     if (repo.stars < STAR_THRESHOLD) continue;
+    if (EXCLUDE_REPOS.has(repo.fullName)) continue;
 
     if (!byRepo.has(repo.fullName)) {
       byRepo.set(repo.fullName, { repo, prs: [] });
