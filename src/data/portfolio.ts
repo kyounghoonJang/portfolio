@@ -180,51 +180,60 @@ export const certifications: Certification[] = [
   },
 ];
 
-// 오픈소스 기여 — 프로젝트별로 묶어서 표시합니다.
+// ============================================================
+//  오픈소스 기여
+//  PR 목록·스타 수는 scripts/update-contributions.mjs 가 GitHub에서 자동 수집해
+//  contributions.generated.json 에 저장합니다. (GitHub Actions가 매일 갱신)
+//  아래 openSourceMeta 의 설명/태그/블로그링크만 손으로 큐레이션하세요.
+// ============================================================
+import contributions from "./contributions.generated.json";
+
 export type OpenSourcePR = {
   title: string;
   url: string;
   merged: boolean;
-  // 핵심 기여에만 한 줄 설명을 붙이면 임팩트가 살아납니다. (선택)
-  note?: string;
+  note?: string; // 큐레이션된 한 줄 설명 (선택)
 };
 export type OpenSource = {
   project: string;
   projectUrl: string;
-  // 프로젝트가 뭔지 한 줄 설명
+  stars: number;
   blurb: string;
   tags: string[];
   prs: OpenSourcePR[];
-  // 이 프로젝트와 연결되는 블로그 글 등 (선택)
   relatedPosts?: { label: string; url: string }[];
 };
 
-export const openSource: OpenSource[] = [
-  {
-    project: "Podman",
-    projectUrl: "https://github.com/podman-container-tools/podman",
-    blurb: "Red Hat의 데몬리스 OCI 컨테이너 엔진 (⭐32k)",
+// repo full name → 큐레이션. 없는 레포는 GitHub 설명/언어로 자동 표시됩니다.
+type OpenSourceMeta = {
+  displayName?: string;
+  blurb?: string;
+  tags?: string[];
+  relatedPosts?: { label: string; url: string }[];
+  notes?: Record<string, string>; // PR url → 한 줄 설명
+};
+
+const openSourceMeta: Record<string, OpenSourceMeta> = {
+  "traefik/traefik": {
+    displayName: "Traefik",
+    blurb: "클라우드 네이티브 리버스 프록시 / 로드밸런서",
+    tags: ["Go", "Networking", "Proxy"],
+  },
+  "apache/airflow": {
+    displayName: "Apache Airflow",
+    blurb: "워크플로우 오케스트레이션 플랫폼 (Apache)",
+    tags: ["Python", "Data", "Workflow"],
+  },
+  "podman-container-tools/podman": {
+    displayName: "Podman",
+    blurb: "Red Hat의 데몬리스 OCI 컨테이너 엔진",
     tags: ["Go", "Containers", "CLI"],
-    prs: [
-      {
-        title: "volume prune: add dry-run support",
-        url: "https://github.com/podman-container-tools/podman/pull/28673",
-        merged: true,
-        note: "삭제 전 어떤 볼륨이 정리될지 미리 보여주는 --dry-run 옵션 추가 (local·remote 모두 지원).",
-      },
-      {
-        title: "add --ignore flag to network rm",
-        url: "https://github.com/podman-container-tools/podman/pull/28391",
-        merged: true,
-        note: "존재하지 않는 네트워크 삭제 시 exit 1 대신 success 반환 — Docker CLI와의 동작 일관성 확보 (#28363).",
-      },
-      {
-        title:
-          "print client info from `podman version` when the server is unavailable",
-        url: "https://github.com/podman-container-tools/podman/pull/28265",
-        merged: true,
-      },
-    ],
+    notes: {
+      "https://github.com/podman-container-tools/podman/pull/28673":
+        "삭제 전 어떤 볼륨이 정리될지 미리 보여주는 --dry-run 옵션 추가 (local·remote 모두 지원).",
+      "https://github.com/podman-container-tools/podman/pull/28391":
+        "존재하지 않는 네트워크 삭제 시 exit 1 대신 success 반환 — Docker CLI와의 동작 일관성 확보 (#28363).",
+    },
     relatedPosts: [
       {
         label: "Deep Dive 0편: Podman 아키텍처",
@@ -236,75 +245,56 @@ export const openSource: OpenSource[] = [
       },
     ],
   },
-  {
-    project: "OpenBao",
-    projectUrl: "https://github.com/openbao/openbao",
-    blurb: "HashiCorp Vault 기반 오픈소스 시크릿 관리 (Linux Foundation)",
-    tags: ["Go", "Secrets", "Security"],
-    prs: [
-      {
-        title: "core: add metrics_only / disallow_metrics listener options",
-        url: "https://github.com/openbao/openbao/pull/1834",
-        merged: true,
-        note: "리스너별 메트릭 노출 제어 옵션 추가 — 모니터링 전용 포트를 분리해 다른 API 노출 없이 메트릭만 제공 (보안 강화, #1704).",
-      },
-      {
-        title: "valkey: support connection_url for configuration",
-        url: "https://github.com/openbao/openbao/pull/1923",
-        merged: true,
-      },
-      {
-        title: "valkey: correctly parse creation_statements as a string array",
-        url: "https://github.com/openbao/openbao/pull/1959",
-        merged: true,
-      },
-      {
-        title: "add BAO_{AGENT,PROXY,MIGRATE}_CONFIG_PATH env variables",
-        url: "https://github.com/openbao/openbao/pull/2153",
-        merged: true,
-      },
-      {
-        title: "remove dependency on github.com/asaskevich/govalidator",
-        url: "https://github.com/openbao/openbao/pull/1868",
-        merged: true,
-      },
-    ],
-  },
-  {
-    project: "Cilium",
-    projectUrl: "https://github.com/cilium/cilium",
+  "cilium/cilium": {
+    displayName: "Cilium",
     blurb: "eBPF 기반 쿠버네티스 네트워킹·보안 (CNCF Graduated)",
     tags: ["Go", "eBPF", "Kubernetes"],
-    prs: [
-      {
-        title: "api: add CiliumPodIPPool v2 API with pool fields",
-        url: "https://github.com/cilium/cilium/pull/44383",
-        merged: true,
-        note: "Multi-Pool IPAM을 위한 CiliumPodIPPool v2 API 신규 추가 — CRD 스키마·검증·codegen 포함 (+1,000여 줄, 16개 파일).",
-      },
+    notes: {
+      "https://github.com/cilium/cilium/pull/44383":
+        "Multi-Pool IPAM을 위한 CiliumPodIPPool v2 API 신규 추가 — CRD 스키마·검증·codegen 포함 (+1,000여 줄, 16개 파일).",
+      "https://github.com/cilium/cilium/pull/41949":
+        "Hubble 흐름 관측에 VRRP·IGMP 프로토콜 파싱 지원 추가.",
+    },
+    relatedPosts: [
+      { label: "[Network] VRRP Protocol", url: "https://codingjang.tistory.com/88" },
     ],
   },
-  {
-    project: "floci",
-    projectUrl: "https://github.com/floci-io/floci",
+  "floci-io/floci": {
+    displayName: "floci",
     blurb: "가볍고 무료인 AWS 로컬 에뮬레이터 (LocalStack 대안)",
-    tags: ["Go", "AWS", "Cloud"],
-    prs: [
-      {
-        title: "kms: add RotateKeyOnDemand support",
-        url: "https://github.com/floci-io/floci/pull/990",
-        merged: true,
-      },
-      {
-        title: "kms: handle RotateKeyOnDemand rotation limit",
-        url: "https://github.com/floci-io/floci/pull/1042",
-        merged: true,
-      },
-      {
-        title: "ec2: add NAT gateway create and describe support",
-        url: "https://github.com/floci-io/floci/pull/1227",
-        merged: false,
-      },
-    ],
+    tags: ["AWS", "Cloud", "Java"],
   },
-];
+  "anchore/syft": {
+    displayName: "Syft",
+    blurb: "컨테이너 이미지·파일시스템에서 SBOM을 생성하는 도구 (Anchore)",
+    tags: ["Go", "SBOM", "Security"],
+  },
+  "openbao/openbao": {
+    displayName: "OpenBao",
+    blurb: "HashiCorp Vault 기반 오픈소스 시크릿 관리 (Linux Foundation)",
+    tags: ["Go", "Secrets", "Security"],
+    notes: {
+      "https://github.com/openbao/openbao/pull/1834":
+        "리스너별 메트릭 노출 제어 옵션 추가 — 모니터링 전용 포트를 분리해 다른 API 노출 없이 메트릭만 제공 (보안 강화, #1704).",
+    },
+  },
+};
+
+// 생성된 JSON + 큐레이션 메타를 합칩니다.
+export const openSource: OpenSource[] = contributions.projects.map((p) => {
+  const meta = openSourceMeta[p.repo] ?? {};
+  return {
+    project: meta.displayName ?? p.repo.split("/")[1],
+    projectUrl: p.repoUrl,
+    stars: p.stars,
+    blurb: meta.blurb ?? p.description,
+    tags: meta.tags ?? (p.language ? [p.language] : []),
+    prs: p.prs.map((pr) => ({
+      title: pr.title,
+      url: pr.url,
+      merged: pr.merged,
+      note: meta.notes?.[pr.url],
+    })),
+    relatedPosts: meta.relatedPosts,
+  };
+});

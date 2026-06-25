@@ -1,0 +1,224 @@
+{
+  "generatedAt": "2026-06-25T12:02:16.694Z",
+  "username": "kyounghoonJang",
+  "starThreshold": 5000,
+  "projects": [
+    {
+      "repo": "traefik/traefik",
+      "repoUrl": "https://github.com/traefik/traefik",
+      "stars": 63729,
+      "description": "The Cloud Native Application Proxy",
+      "language": "Go",
+      "prs": [
+        {
+          "title": "Add authSignInURL in forward auth middleware",
+          "url": "https://github.com/traefik/traefik/pull/12293",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-11-20T01:54:10Z"
+        },
+        {
+          "title": "feature: Supports AWS QUIC",
+          "url": "https://github.com/traefik/traefik/pull/12470",
+          "merged": false,
+          "state": "open",
+          "createdAt": "2025-12-26T08:16:18Z"
+        },
+        {
+          "title": "Implement waiting for Nomad health status before service registration",
+          "url": "https://github.com/traefik/traefik/pull/12299",
+          "merged": false,
+          "state": "open",
+          "createdAt": "2025-11-21T08:49:24Z"
+        },
+        {
+          "title": "Add TCP health check support for ExternalName services",
+          "url": "https://github.com/traefik/traefik/pull/12290",
+          "merged": false,
+          "state": "open",
+          "createdAt": "2025-11-19T02:07:42Z"
+        }
+      ]
+    },
+    {
+      "repo": "apache/airflow",
+      "repoUrl": "https://github.com/apache/airflow",
+      "stars": 45916,
+      "description": "Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",
+      "language": "Python",
+      "prs": [
+        {
+          "title": "Migrate FAB PATCH /roles/{name} to FastAPI",
+          "url": "https://github.com/apache/airflow/pull/58023",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-11-07T06:37:03Z"
+        },
+        {
+          "title": "Migrate FAB GET /roles/{name} to FastAPI",
+          "url": "https://github.com/apache/airflow/pull/58009",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-11-07T02:16:37Z"
+        },
+        {
+          "title": "Migrate FAB DELETE /roles to FastAPI",
+          "url": "https://github.com/apache/airflow/pull/57780",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-11-04T01:23:12Z"
+        }
+      ]
+    },
+    {
+      "repo": "podman-container-tools/podman",
+      "repoUrl": "https://github.com/podman-container-tools/podman",
+      "stars": 32092,
+      "description": "Podman: A tool for managing OCI containers and pods.",
+      "language": "Go",
+      "prs": [
+        {
+          "title": "volume prune: add dry-run support",
+          "url": "https://github.com/podman-container-tools/podman/pull/28673",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-05-10T15:38:03Z"
+        },
+        {
+          "title": "feat: add --ignore flag to network rm",
+          "url": "https://github.com/podman-container-tools/podman/pull/28391",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-03-27T07:12:54Z"
+        },
+        {
+          "title": "feat: print client info from `podman version` when the server is not available",
+          "url": "https://github.com/podman-container-tools/podman/pull/28265",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-03-12T03:21:59Z"
+        },
+        {
+          "title": "feat(info): expose default network name",
+          "url": "https://github.com/podman-container-tools/podman/pull/27608",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-11-26T01:19:54Z"
+        }
+      ]
+    },
+    {
+      "repo": "cilium/cilium",
+      "repoUrl": "https://github.com/cilium/cilium",
+      "stars": 24593,
+      "description": "eBPF-based Networking, Security, and Observability",
+      "language": "Go",
+      "prs": [
+        {
+          "title": "api: add CiliumPodIPPool v2 API with pool fields",
+          "url": "https://github.com/cilium/cilium/pull/44383",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-02-16T11:26:47Z"
+        },
+        {
+          "title": "feat(hubble): Add support for VRRP and IGMP protocols",
+          "url": "https://github.com/cilium/cilium/pull/41949",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-09-30T06:12:47Z"
+        }
+      ]
+    },
+    {
+      "repo": "floci-io/floci",
+      "repoUrl": "https://github.com/floci-io/floci",
+      "stars": 14425,
+      "description": "Light, fluffy, and always free - The AWS Local Emulator alternative",
+      "language": "Java",
+      "prs": [
+        {
+          "title": "feat(kms): handle RotateKeyOnDemand rotation limit",
+          "url": "https://github.com/floci-io/floci/pull/1042",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-05-26T07:17:46Z"
+        },
+        {
+          "title": "feat(kms): add RotateKeyOnDemand support",
+          "url": "https://github.com/floci-io/floci/pull/990",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-05-22T01:06:47Z"
+        },
+        {
+          "title": "feat(ec2): add NAT gateway create and describe support",
+          "url": "https://github.com/floci-io/floci/pull/1227",
+          "merged": false,
+          "state": "open",
+          "createdAt": "2026-06-08T06:33:08Z"
+        }
+      ]
+    },
+    {
+      "repo": "anchore/syft",
+      "repoUrl": "https://github.com/anchore/syft",
+      "stars": 9158,
+      "description": "CLI tool and library for generating a Software Bill of Materials from container images and filesystems",
+      "language": "Go",
+      "prs": [
+        {
+          "title": "feat(java): Add support for .far (Feature Archive) files",
+          "url": "https://github.com/anchore/syft/pull/4193",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-09-07T13:19:00Z"
+        }
+      ]
+    },
+    {
+      "repo": "openbao/openbao",
+      "repoUrl": "https://github.com/openbao/openbao",
+      "stars": 6455,
+      "description": "OpenBao is a software solution to manage, store, and distribute sensitive data including secrets, certificates, and keys.",
+      "language": "Go",
+      "prs": [
+        {
+          "title": "Add BAO_{AGENT,PROXY,MIGRATE}_CONFIG_PATH variables",
+          "url": "https://github.com/openbao/openbao/pull/2153",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-11-25T09:14:50Z"
+        },
+        {
+          "title": "fix(valkey): Correctly parse creation_statements as a string array",
+          "url": "https://github.com/openbao/openbao/pull/1959",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-10-16T14:49:31Z"
+        },
+        {
+          "title": "feat(valkey): Support connection_url for configuration",
+          "url": "https://github.com/openbao/openbao/pull/1923",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-10-15T06:04:11Z"
+        },
+        {
+          "title": "refactor: Remove dependency on github.com/asaskevich/govalidator",
+          "url": "https://github.com/openbao/openbao/pull/1868",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-09-30T07:43:27Z"
+        },
+        {
+          "title": "feat(core): Add metrics_only and disallow_metrics listener options",
+          "url": "https://github.com/openbao/openbao/pull/1834",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2025-09-21T05:41:28Z"
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,10 @@
 import { motion } from "motion/react";
 import { openSource } from "@/data/portfolio";
 
+function formatStars(n: number) {
+  return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : `${n}`;
+}
+
 export function OpenSource() {
   return (
     <div className="space-y-6">
@@ -20,9 +24,13 @@ export function OpenSource() {
               href={item.projectUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-lg font-semibold hover:text-accent"
+              className="flex items-center gap-2 text-lg font-semibold hover:text-accent"
             >
-              {item.project} <span className="text-muted">↗</span>
+              {item.project}
+              <span className="font-mono text-xs font-normal text-muted">
+                ★ {formatStars(item.stars)}
+              </span>
+              <span className="text-muted">↗</span>
             </a>
             <ul className="flex flex-wrap gap-2">
               {item.tags.map((tag) => (

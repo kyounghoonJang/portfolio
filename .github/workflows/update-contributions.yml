@@ -1,0 +1,42 @@
+name: Update open source contributions
+
+# 매일 한 번 + 수동 실행. PR이 merge/open 되면 자동으로 사이트 데이터에 반영됩니다.
+on:
+  schedule:
+    - cron: "0 0 * * *" # 매일 00:00 UTC (KST 09:00)
+  workflow_dispatch: {}
+
+# 변경분을 레포에 커밋해야 하므로 쓰기 권한 필요
+permissions:
+  contents: write
+
+concurrency:
+  group: update-contributions
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Collect contributions from GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/update-contributions.mjs
+
+      - name: Commit & push if changed
+        run: |
+          if git diff --quiet -- src/data/contributions.generated.json; then
+            echo "변경 없음 — 커밋 건너뜀"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/contributions.generated.json
+          git commit -m "chore: update open source contributions"
+          git push
