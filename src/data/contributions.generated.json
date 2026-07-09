@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-08T03:14:56.743Z",
+  "generatedAt": "2026-07-09T03:38:49.628Z",
   "username": "kyounghoonJang",
   "starThreshold": 5000,
   "projects": [
     {
       "repo": "traefik/traefik",
       "repoUrl": "https://github.com/traefik/traefik",
-      "stars": 63900,
+      "stars": 63913,
       "description": "The Cloud Native Application Proxy",
       "language": "Go",
       "prs": [
@@ -43,7 +43,7 @@
     {
       "repo": "apache/airflow",
       "repoUrl": "https://github.com/apache/airflow",
-      "stars": 46056,
+      "stars": 46068,
       "description": "Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",
       "language": "Python",
       "prs": [
@@ -73,7 +73,7 @@
     {
       "repo": "podman-container-tools/podman",
       "repoUrl": "https://github.com/podman-container-tools/podman",
-      "stars": 32242,
+      "stars": 32245,
       "description": "Podman: A tool for managing OCI containers and pods.",
       "language": "Go",
       "prs": [
@@ -110,7 +110,7 @@
     {
       "repo": "cilium/cilium",
       "repoUrl": "https://github.com/cilium/cilium",
-      "stars": 24670,
+      "stars": 24681,
       "description": "eBPF-based Networking, Security, and Observability",
       "language": "Go",
       "prs": [
@@ -140,7 +140,7 @@
     {
       "repo": "floci-io/floci",
       "repoUrl": "https://github.com/floci-io/floci",
-      "stars": 15575,
+      "stars": 15784,
       "description": "Light, fluffy, and always free - The AWS Local Emulator alternative",
       "language": "Java",
       "prs": [
@@ -163,7 +163,7 @@
     {
       "repo": "openbao/openbao",
       "repoUrl": "https://github.com/openbao/openbao",
-      "stars": 6569,
+      "stars": 6579,
       "description": "OpenBao is a software solution to manage, store, and distribute sensitive data including secrets, certificates, and keys.",
       "language": "Go",
       "prs": [
