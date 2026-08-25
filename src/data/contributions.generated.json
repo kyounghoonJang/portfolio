@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-08-24T01:35:36.864Z",
+  "generatedAt": "2026-08-25T01:25:30.159Z",
   "username": "kyounghoonJang",
   "starThreshold": 5000,
   "projects": [
     {
       "repo": "traefik/traefik",
       "repoUrl": "https://github.com/traefik/traefik",
-      "stars": 64550,
+      "stars": 64568,
       "description": "The Cloud Native Application Proxy",
       "language": "Go",
       "prs": [
@@ -43,7 +43,7 @@
     {
       "repo": "apache/airflow",
       "repoUrl": "https://github.com/apache/airflow",
-      "stars": 46589,
+      "stars": 46599,
       "description": "Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",
       "language": "Python",
       "prs": [
@@ -73,7 +73,7 @@
     {
       "repo": "podman-container-tools/podman",
       "repoUrl": "https://github.com/podman-container-tools/podman",
-      "stars": 32670,
+      "stars": 32681,
       "description": "Podman: A tool for managing OCI containers and pods.",
       "language": "Go",
       "prs": [
@@ -110,10 +110,17 @@
     {
       "repo": "cilium/cilium",
       "repoUrl": "https://github.com/cilium/cilium",
-      "stars": 25002,
+      "stars": 25004,
       "description": "eBPF-based Networking, Security, and Observability",
       "language": "Go",
       "prs": [
+        {
+          "title": "ipam: Added ReservedRange To CiliumPodIPPool",
+          "url": "https://github.com/cilium/cilium/pull/46880",
+          "merged": true,
+          "state": "merged",
+          "createdAt": "2026-07-03T08:51:36Z"
+        },
         {
           "title": "api: add CiliumPodIPPool v2 API with pool fields",
           "url": "https://github.com/cilium/cilium/pull/44383",
@@ -127,20 +134,13 @@
           "merged": true,
           "state": "merged",
           "createdAt": "2025-09-30T06:12:47Z"
-        },
-        {
-          "title": "ipam: Added ReservedRange To CiliumPodIPPool",
-          "url": "https://github.com/cilium/cilium/pull/46880",
-          "merged": false,
-          "state": "open",
-          "createdAt": "2026-07-03T08:51:36Z"
         }
       ]
     },
     {
       "repo": "floci-io/floci",
       "repoUrl": "https://github.com/floci-io/floci",
-      "stars": 21504,
+      "stars": 21954,
       "description": "Light, fluffy, and always free - The AWS Local Emulator alternative",
       "language": "Java",
       "prs": [
@@ -163,7 +163,7 @@
     {
       "repo": "openbao/openbao",
       "repoUrl": "https://github.com/openbao/openbao",
-      "stars": 7130,
+      "stars": 7142,
       "description": "OpenBao is a software solution to manage, store, and distribute sensitive data including secrets, certificates, and keys.",
       "language": "Go",
       "prs": [
