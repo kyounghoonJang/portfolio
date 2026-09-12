@@ -6,6 +6,7 @@
 export const profile = {
   name: "장경훈",
   role: "Database Engineer",
+  // 화면에는 표시되지 않고, 검색결과/SNS 공유 시 보이는 설명으로만 쓰입니다.
   tagline:
     "데이터베이스의 내부 동작과 성능을 파고들고, 오픈소스에 직접 코드로 기여하는 엔지니어입니다.",
   location: "Seoul, Korea",

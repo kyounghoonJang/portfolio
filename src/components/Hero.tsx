@@ -34,13 +34,6 @@ export function Hero() {
         <motion.p variants={item} className="mt-4 text-xl text-muted sm:text-2xl">
           {profile.role}
         </motion.p>
-        <motion.p
-          variants={item}
-          className="mt-6 max-w-xl text-lg leading-relaxed"
-        >
-          {profile.tagline}
-        </motion.p>
-
         <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
           {profile.github && (
             <a
