@@ -25,8 +25,8 @@ export const profile = {
 export type Skill = { category: string; items: string[] };
 
 export const skills: Skill[] = [
-  { category: "Database", items: ["SingleStore", "SQL", "Oracle"] },
-  { category: "Data", items: ["Kafka", "Apache Airflow", "Spark"] },
+  { category: "Database", items: ["SingleStore"] },
+  { category: "Data", items: ["Kafka", "Apache Airflow"] },
   { category: "Platform", items: ["Kubernetes", "Podman", "Linux"] },
   { category: "Development", items: ["Python", "Go"] },
   { category: "Cloud / Observability", items: ["AWS", "Grafana"] },
@@ -37,11 +37,8 @@ export type Experience = {
   role: string;
   period: string;
   summary: string;
-  // 핵심 성과 — 수치를 강조하면 좋습니다. value가 크게 표시됩니다.
-  metrics?: { value: string; label: string }[];
-  // "상세 내용 보기"를 누르면 펼쳐지는 내용
-  details: string[];
-  tags?: string[];
+  // 이력서처럼 소제목 + 항목으로 묶어서 항상 펼쳐진 상태로 표시됩니다.
+  details: { group: string; items: string[] }[];
 };
 
 export const experiences: Experience[] = [
@@ -51,23 +48,38 @@ export const experiences: Experience[] = [
     period: "2025.01 – 현재",
     summary:
       "SingleStore 기반 마이그레이션·POC 수행, 모니터링 플랫폼 구축, 성능 이슈의 내부 원인 분석까지 담당하고 있습니다.",
-    metrics: [
-      { value: "20배", label: "INSERT 성능 향상" },
-      { value: "1천만 건", label: "Vector Search 성능 프로파일링" },
-    ],
     details: [
-      "[Migration/POC] 고객 POC 에서 Apache Spark 기반 데이터 처리 로직을 SingleStore SQL 로 전환하고 함수 로직을 CTE 로 재설계하여 결과 정합성 및 SingleStore 기반 처리 가능성 검증",
-      "[Migration/POC] Oracle Function 및 DDL 을 SingleStore 호환 구조로 변환하고 기능·데이터 정합성을 검증하여 이기종 데이터베이스 마이그레이션 호환성 검증",
-      "[Migration/POC] DB에 등록된 작업 스케줄에 따라 데이터를 배치 단위로 이관하는 Airflow 기반 마이그레이션 도구를 설계·개발하고, 진행 상태 관리와 실패 재시도 및 중단 지점부터의 재개 기능 구현",
-      "[Observability] Information Schema 기반 성능 지표의 수집·저장 구조와 플랫폼 아키텍처를 설계하고, Python Collector 와 모니터링 플랫폼 Pulse 를 개발해 Grafana 와 연동",
-      "[Observability] 수집 데이터를 기반으로 정기 리포트 자동 생성 기능을 개발하여 지표 수집부터 모니터링·리포팅까지 통합 Observability 환경 구축",
-      "[Performance] 고객사의 executemany INSERT 성능 저하 이슈에서 NOW() 사용으로 Multi-Value Insert 최적화가 적용되지 않는 병목을 규명하고, 쿼리 구조 개선으로 INSERT 성능 약 20배 향상",
-      "[Performance] 약 1천만 건 규모의 SingleStore Vector Search 를 프로파일링하여 pread 기반 I/O 및 메모리 복사 과정의 병목을 분석, Elasticsearch 와의 성능 차이 원인을 규명해 제품 개선 요청으로 연결",
-      "[Performance] Full-Text Search 인덱스 생성 성능 저하 이슈에서 내부 처리 구조의 한계를 규명하고, 분석 결과를 아키텍처 문서로 정리해 제품 개선 요청으로 연결",
-      "[AI/Data] Notion · Google Chat 등 분산된 사내 데이터를 수집하고 OKF 포맷으로 표준화하는 연동·변환 파이프라인을 설계·개발하여 Knowledge Agent 가 활용 가능한 지식 구조 구축",
-      "[AI/Data] 원본 데이터 변경을 지속 반영하는 동기화 구조를 구현하고, 수집–변환–저장–검색으로 이어지는 사내 Knowledge Search 아키텍처 구축",
+      {
+        group: "Database Migration / POC",
+        items: [
+          "고객 POC 에서 Apache Spark 기반 데이터 처리 로직을 SingleStore SQL 로 전환하고 함수 로직을 CTE 로 재설계하여 결과 정합성 및 SingleStore 기반 처리 가능성 검증",
+          "Oracle Function 및 DDL 을 SingleStore 호환 구조로 변환하고 기능·데이터 정합성을 검증하여 이기종 데이터베이스 마이그레이션 호환성 검증",
+          "DB에 등록된 작업 스케줄에 따라 데이터를 배치 단위로 이관하는 Airflow 기반 마이그레이션 도구를 설계·개발하고, 진행 상태 관리와 실패 재시도 및 중단 지점부터의 재개 기능 구현",
+        ],
+      },
+      {
+        group: "Monitoring Platform / Observability",
+        items: [
+          "Information Schema 기반 성능 지표의 수집·저장 구조와 플랫폼 아키텍처를 설계하고, Python Collector 와 모니터링 플랫폼 Pulse 를 개발해 Grafana 와 연동",
+          "수집 데이터를 기반으로 정기 리포트 자동 생성 기능을 개발하여 지표 수집부터 모니터링·리포팅까지 통합 Observability 환경 구축",
+        ],
+      },
+      {
+        group: "Database Performance / Internals",
+        items: [
+          "고객사의 executemany INSERT 성능 저하 이슈에서 NOW() 사용으로 Multi-Value Insert 최적화가 적용되지 않는 병목을 규명하고, 쿼리 구조 개선으로 INSERT 성능 약 20배 향상",
+          "약 1천만 건 규모의 SingleStore Vector Search 를 프로파일링하여 pread 기반 I/O 및 메모리 복사 과정의 병목을 분석, Elasticsearch 와의 성능 차이 원인을 규명해 제품 개선 요청으로 연결",
+          "Full-Text Search 인덱스 생성 성능 저하 이슈에서 내부 처리 구조의 한계를 규명하고, 분석 결과를 아키텍처 문서로 정리해 제품 개선 요청으로 연결",
+        ],
+      },
+      {
+        group: "AI Knowledge Search / Data Integration",
+        items: [
+          "Notion · Google Chat 등 분산된 사내 데이터를 수집하고 OKF 포맷으로 표준화하는 연동·변환 파이프라인을 설계·개발하여 Knowledge Agent 가 활용 가능한 지식 구조 구축",
+          "원본 데이터 변경을 지속 반영하는 동기화 구조를 구현하고, 수집–변환–저장–검색으로 이어지는 사내 Knowledge Search 아키텍처 구축",
+        ],
+      },
     ],
-    tags: ["SingleStore", "Python", "Airflow", "Kafka", "Grafana", "Kubernetes"],
   },
   {
     company: "무하유",
@@ -75,15 +87,15 @@ export const experiences: Experience[] = [
     period: "2024.09 – 2024.12",
     summary:
       "대규모 문서·웹 콘텐츠 수집 파이프라인을 개발·점검하고 신규 수집처를 확보했습니다.",
-    metrics: [
-      { value: "430개", label: "신규 수집처 등록" },
-      { value: "20억 건", label: "웹 콘텐츠 수집" },
-    ],
     details: [
-      "데이터 수집기를 개발·점검하고 일본 대학·정부기관 신규 수집처 430개를 등록, 중국 미디어 수집처 289개를 정비",
-      "중국 레포지토리·웹 콘텐츠를 수집해 문서 7,500만 건과 웹 콘텐츠 20억 건 규모의 데이터를 확보",
+      {
+        group: "Data Collection Pipeline",
+        items: [
+          "데이터 수집기를 개발·점검하고 일본 대학·정부기관 신규 수집처 430개를 등록, 중국 미디어 수집처 289개를 정비",
+          "중국 레포지토리·웹 콘텐츠를 수집해 문서 7,500만 건과 웹 콘텐츠 20억 건 규모의 데이터를 확보",
+        ],
+      },
     ],
-    tags: ["Python", "Data Pipeline", "Crawling"],
   },
 ];
 
@@ -164,7 +176,6 @@ import contributions from "./contributions.generated.json";
 export type OpenSourcePR = {
   title: string;
   url: string;
-  merged: boolean;
   note?: string; // 큐레이션된 한 줄 설명 (선택)
 };
 export type OpenSource = {
@@ -242,7 +253,7 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
   },
   "floci-io/floci": {
     displayName: "floci",
-    blurb: "가볍고 무료인 AWS 로컬 에뮬레이터 (LocalStack 대안)",
+    blurb: "가볍고 무료인 AWS 로컬 에뮬레이터",
     tags: ["AWS", "Cloud", "Java"],
   },
   "openbao/openbao": {
@@ -257,7 +268,9 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
 };
 
 // 생성된 JSON + 큐레이션 메타를 합칩니다.
-export const openSource: OpenSource[] = contributions.projects.map((p) => {
+// 머지된 PR만 노출하고, 머지 건이 없는 레포는 제외합니다.
+export const openSource: OpenSource[] = contributions.projects
+  .map((p) => {
   const meta = openSourceMeta[p.repo] ?? {};
   return {
     project: meta.displayName ?? p.repo.split("/")[1],
@@ -265,12 +278,14 @@ export const openSource: OpenSource[] = contributions.projects.map((p) => {
     stars: p.stars,
     blurb: meta.blurb ?? p.description,
     tags: meta.tags ?? (p.language ? [p.language] : []),
-    prs: p.prs.map((pr) => ({
-      title: pr.title,
-      url: pr.url,
-      merged: pr.merged,
-      note: meta.notes?.[pr.url],
-    })),
+    prs: p.prs
+      .filter((pr) => pr.merged)
+      .map((pr) => ({
+        title: pr.title,
+        url: pr.url,
+        note: meta.notes?.[pr.url],
+      })),
     relatedPosts: meta.relatedPosts,
   };
-});
+  })
+  .filter((p) => p.prs.length > 0);

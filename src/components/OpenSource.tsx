@@ -46,33 +46,22 @@ export function OpenSource() {
 
           <p className="mt-1 text-sm text-muted">{item.blurb}</p>
 
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-4 list-disc space-y-2.5 pl-5 text-sm marker:text-muted">
             {item.prs.map((pr) => (
-              <li key={pr.url} className="flex items-start gap-2.5 text-sm">
-                <span
-                  className={`mt-0.5 shrink-0 rounded-full px-1.5 py-0.5 font-mono text-[10px] font-medium ${
-                    pr.merged
-                      ? "bg-accent/15 text-accent"
-                      : "bg-border text-muted"
-                  }`}
+              <li key={pr.url}>
+                <a
+                  href={pr.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="leading-relaxed text-foreground transition-colors hover:text-accent"
                 >
-                  {pr.merged ? "MERGED" : "OPEN"}
-                </span>
-                <span className="min-w-0">
-                  <a
-                    href={pr.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="leading-relaxed text-foreground transition-colors hover:text-accent"
-                  >
-                    {pr.title}
-                  </a>
-                  {pr.note && (
-                    <span className="mt-0.5 block text-[13px] leading-relaxed text-muted">
-                      {pr.note}
-                    </span>
-                  )}
-                </span>
+                  {pr.title}
+                </a>
+                {pr.note && (
+                  <span className="mt-0.5 block text-[13px] leading-relaxed text-muted">
+                    {pr.note}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
