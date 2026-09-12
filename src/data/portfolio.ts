@@ -1,13 +1,13 @@
 // ============================================================
 //  이 파일만 고치면 포트폴리오 내용이 전부 바뀝니다.
-//  (이름, 소개, 스킬, 경력, 오픈소스, 프로젝트, 학력, 자격증, 연락처)
+//  (이름, 소개, 스킬, 경력, 오픈소스, 학력, 자격증, 연락처)
 // ============================================================
 
 export const profile = {
   name: "장경훈",
-  role: "Infrastructure Engineer",
+  role: "Database Engineer",
   tagline:
-    "컨테이너·쿠버네티스·클라우드 인프라를 다루며, 오픈소스로 기여하는 인프라 엔지니어입니다.",
+    "데이터베이스의 내부 동작과 성능을 파고들고, 오픈소스에 직접 코드로 기여하는 엔지니어입니다.",
   location: "Seoul, Korea",
   email: "owndill19@gmail.com",
   // 비워두면 해당 버튼이 표시되지 않습니다.
@@ -16,28 +16,19 @@ export const profile = {
   blog: "https://codingjang.tistory.com/", // 비워두면 블로그 섹션이 숨겨집니다.
   resumeUrl: "", // PDF 이력서 링크 (예: "/resume.pdf")
   about: [
-    "컨테이너, 쿠버네티스, 클라우드 네이티브 인프라에 관심이 많은 인프라 엔지니어입니다. Podman, Cilium, OpenBao 등 핵심 오픈소스 프로젝트에 직접 기여하며 대규모 코드베이스를 읽고 협업하는 경험을 쌓아왔습니다.",
-    "여기에 본인을 더 구체적으로 소개하세요 — 어떤 인프라 문제를 즐겨 풀고, 어떤 스택(쿠버네티스/IaC/관측성 등)에 강하며, 앞으로 어떤 인프라 엔지니어가 되고 싶은지로 마무리하면 인상이 좋습니다.",
+    "데이터베이스의 내부 동작과 성능을 분석하고, 고객 환경에서 발생하는 기술적 문제를 해결해 온 Database Engineer 입니다. SingleStore 를 중심으로 다양한 워크로드의 POC 와 성능 검증을 수행했으며, 성능 이슈가 발생하면 쿼리와 DB 지표를 넘어 OS · I/O · 메모리 및 실행 구조까지 분석 범위를 확장해 원인을 추적합니다.",
+    "업무 외에도 Cilium, Apache Airflow, Podman, OpenBao 등 대규모 오픈소스 프로젝트에 기여하며, 처음 보는 코드베이스를 분석하고 실제 코드 변경으로 문제를 해결하는 경험을 이어가고 있습니다.",
   ],
 };
 
 export type Skill = { category: string; items: string[] };
 
-// ⚠️ 실제로 다룰 수 있는 것만 남기고 자유롭게 수정하세요.
 export const skills: Skill[] = [
-  { category: "Languages", items: ["Go", "Python", "Bash", "TypeScript"] },
-  {
-    category: "Containers / Orchestration",
-    items: ["Kubernetes", "Docker", "Podman", "Helm"],
-  },
-  {
-    category: "Cloud / IaC",
-    items: ["AWS", "Terraform", "Cilium", "Linux"],
-  },
-  {
-    category: "Observability / CI·CD",
-    items: ["Prometheus", "Grafana", "GitHub Actions", "ArgoCD"],
-  },
+  { category: "Database", items: ["SingleStore", "SQL", "Oracle"] },
+  { category: "Data", items: ["Kafka", "Apache Airflow", "Spark"] },
+  { category: "Platform", items: ["Kubernetes", "Podman", "Linux"] },
+  { category: "Development", items: ["Python", "Go"] },
+  { category: "Cloud / Observability", items: ["AWS", "Grafana"] },
 ];
 
 export type Experience = {
@@ -54,69 +45,44 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    company: "회사 / 팀 이름",
-    role: "Frontend Engineer",
-    period: "2023.01 – 현재",
-    summary: "이 조직에서 맡았던 역할과 책임을 한 줄로 요약합니다.",
+    company: "에이플랫폼",
+    role: "Database Engineer",
+    period: "2025.01 – 현재",
+    summary:
+      "SingleStore 기반 마이그레이션·POC 수행, 모니터링 플랫폼 구축, 성능 이슈의 내부 원인 분석까지 담당하고 있습니다.",
     metrics: [
-      { value: "40%", label: "페이지 로드 단축" },
-      { value: "18만→20만", label: "MAU 증가" },
+      { value: "20배", label: "INSERT 성능 향상" },
+      { value: "1천만 건", label: "Vector Search 성능 프로파일링" },
     ],
     details: [
-      "구체적인 성과를 숫자와 함께 적으면 좋습니다.",
-      "어떤 기술/방법으로 어떤 문제를 해결했는지 적습니다.",
-      "팀에서 주도한 일이 있다면 강조하세요.",
+      "[Migration/POC] 고객 POC 에서 Apache Spark 기반 데이터 처리 로직을 SingleStore SQL 로 전환하고 함수 로직을 CTE 로 재설계하여 결과 정합성 및 SingleStore 기반 처리 가능성 검증",
+      "[Migration/POC] Oracle Function 및 DDL 을 SingleStore 호환 구조로 변환하고 기능·데이터 정합성을 검증하여 이기종 데이터베이스 마이그레이션 호환성 검증",
+      "[Migration/POC] DB에 등록된 작업 스케줄에 따라 데이터를 배치 단위로 이관하는 Airflow 기반 마이그레이션 도구를 설계·개발하고, 진행 상태 관리와 실패 재시도 및 중단 지점부터의 재개 기능 구현",
+      "[Observability] Information Schema 기반 성능 지표의 수집·저장 구조와 플랫폼 아키텍처를 설계하고, Python Collector 와 모니터링 플랫폼 Pulse 를 개발해 Grafana 와 연동",
+      "[Observability] 수집 데이터를 기반으로 정기 리포트 자동 생성 기능을 개발하여 지표 수집부터 모니터링·리포팅까지 통합 Observability 환경 구축",
+      "[Performance] 고객사의 executemany INSERT 성능 저하 이슈에서 NOW() 사용으로 Multi-Value Insert 최적화가 적용되지 않는 병목을 규명하고, 쿼리 구조 개선으로 INSERT 성능 약 20배 향상",
+      "[Performance] 약 1천만 건 규모의 SingleStore Vector Search 를 프로파일링하여 pread 기반 I/O 및 메모리 복사 과정의 병목을 분석, Elasticsearch 와의 성능 차이 원인을 규명해 제품 개선 요청으로 연결",
+      "[Performance] Full-Text Search 인덱스 생성 성능 저하 이슈에서 내부 처리 구조의 한계를 규명하고, 분석 결과를 아키텍처 문서로 정리해 제품 개선 요청으로 연결",
+      "[AI/Data] Notion · Google Chat 등 분산된 사내 데이터를 수집하고 OKF 포맷으로 표준화하는 연동·변환 파이프라인을 설계·개발하여 Knowledge Agent 가 활용 가능한 지식 구조 구축",
+      "[AI/Data] 원본 데이터 변경을 지속 반영하는 동기화 구조를 구현하고, 수집–변환–저장–검색으로 이어지는 사내 Knowledge Search 아키텍처 구축",
     ],
-    tags: ["React", "Next.js", "TypeScript"],
+    tags: ["SingleStore", "Python", "Airflow", "Kafka", "Grafana", "Kubernetes"],
   },
   {
-    company: "이전 회사 / 프로젝트",
-    role: "Frontend Developer",
-    period: "2021.06 – 2022.12",
-    summary: "또 다른 경력을 추가할 수 있습니다.",
-    details: ["주요 업무 1", "주요 업무 2"],
-    tags: ["React", "JavaScript"],
-  },
-];
-
-export type Project = {
-  title: string;
-  description: string;
-  tags: string[];
-  liveUrl?: string;
-  repoUrl?: string;
-  // public/ 폴더 기준 경로 (예: "/projects/app.gif" 또는 ".png"). 없으면 placeholder.
-  image?: string;
-};
-
-export const projects: Project[] = [
-  {
-    title: "프로젝트 이름 A",
-    description:
-      "이 프로젝트가 무엇이고, 어떤 문제를 풀었으며, 내가 어떤 부분을 담당했는지 2~3문장으로 설명합니다.",
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    liveUrl: "https://example.com",
-    repoUrl: "https://github.com/kyounghoonJang/project-a",
-    image: "",
-  },
-  {
-    title: "프로젝트 이름 B",
-    description:
-      "두 번째 프로젝트 설명. 사용한 기술과 결과(사용자 수, 성능 개선 등)를 적어주세요.",
-    tags: ["React", "Node.js", "PostgreSQL"],
-    repoUrl: "https://github.com/kyounghoonJang/project-b",
-    image: "",
-  },
-];
-
-// 사이드 프로젝트 (개인/토이 프로젝트)
-export const sideProjects: Project[] = [
-  {
-    title: "사이드 프로젝트",
-    description: "개인적으로 만든 토이 프로젝트나 실험적인 작업물을 적습니다.",
-    tags: ["React", "Vite"],
-    repoUrl: "https://github.com/kyounghoonJang/side-project",
-    image: "",
+    company: "무하유",
+    role: "Data Engineer Intern",
+    period: "2024.09 – 2024.12",
+    summary:
+      "대규모 문서·웹 콘텐츠 수집 파이프라인을 개발·점검하고 신규 수집처를 확보했습니다.",
+    metrics: [
+      { value: "430개", label: "신규 수집처 등록" },
+      { value: "20억 건", label: "웹 콘텐츠 수집" },
+    ],
+    details: [
+      "데이터 수집기를 개발·점검하고 일본 대학·정부기관 신규 수집처 430개를 등록, 중국 미디어 수집처 289개를 정비",
+      "중국 레포지토리·웹 콘텐츠를 수집해 문서 7,500만 건과 웹 콘텐츠 20억 건 규모의 데이터를 확보",
+    ],
+    tags: ["Python", "Data Pipeline", "Crawling"],
   },
 ];
 
@@ -142,6 +108,12 @@ export type Certification = {
 };
 
 export const certifications: Certification[] = [
+  {
+    name: "정보처리기사",
+    issuer: "한국산업인력공단",
+    date: "2026.09",
+    url: "",
+  },
   {
     name: "AWS Certified Data Engineer – Associate",
     issuer: "Amazon Web Services",
@@ -221,8 +193,16 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
   },
   "apache/airflow": {
     displayName: "Apache Airflow",
-    blurb: "워크플로우 오케스트레이션 플랫폼 (Apache)",
+    blurb: "워크플로우 오케스트레이션 플랫폼 (Apache Software Foundation)",
     tags: ["Python", "Data", "Workflow"],
+    notes: {
+      "https://github.com/apache/airflow/pull/58023":
+        "FAB Provider 의 Role PATCH API 를 Flask/Connexion 에서 FastAPI 로 마이그레이션 (서비스 로직·응답 테스트 포함).",
+      "https://github.com/apache/airflow/pull/58009":
+        "FAB Provider 의 Role GET API 를 FastAPI 로 마이그레이션.",
+      "https://github.com/apache/airflow/pull/57780":
+        "FAB Provider 의 Role DELETE API 를 FastAPI 로 마이그레이션.",
+    },
   },
   "podman-container-tools/podman": {
     displayName: "Podman",

@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# resume (contains phone number — keep out of the public repo)
+*_이력서.pdf

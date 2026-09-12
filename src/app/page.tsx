@@ -1,7 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Section } from "@/components/Section";
-import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
 import { OpenSource } from "@/components/OpenSource";
 import { Certifications } from "@/components/Certifications";
@@ -9,8 +8,6 @@ import { Blog } from "@/components/Blog";
 import {
   profile,
   skills,
-  projects,
-  sideProjects,
   education,
 } from "@/data/portfolio";
 
@@ -37,13 +34,6 @@ export default function Home() {
           <OpenSource />
         </Section>
 
-        <Section id="projects" title="Projects">
-          <Projects items={projects} />
-        </Section>
-
-        <Section id="side" title="Side Projects">
-          <Projects items={sideProjects} />
-        </Section>
 
         <Section id="skills" title="Skills">
           <div className="grid gap-6 sm:grid-cols-2">
