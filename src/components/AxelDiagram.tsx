@@ -116,8 +116,8 @@ export function AxelDiagram() {
           >
             <text x="4" y="14">① 문서 생성 — webhook 이벤트 발생 시</text>
             <text x="4" y="282">② 질의 — 사용자 질문 시</text>
-            <text x="318" y="64">webhook 으로 원본 변경 감지</text>
-            <text x="318" y="284">llms.txt 를 먼저 읽고 → 필요한 OKF 문서만 탐색</text>
+            <text x="318" y="64">webhook으로 원본 변경 감지</text>
+            <text x="318" y="284">llms.txt를 먼저 읽고 → 필요한 OKF 문서만 탐색</text>
             <text x="262" y="386" textAnchor="end">
               질문
             </text>
