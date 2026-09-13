@@ -11,8 +11,8 @@ export function Experience() {
 
           <div className="min-w-0 flex-1">
             <h3 className="text-lg font-semibold">
-              {exp.company}{" "}
-              <span className="font-normal text-muted">· {exp.role}</span>
+              {exp.company}
+              <span className="ml-2.5 font-normal text-muted">{exp.role}</span>
             </h3>
             <p className="mt-1 text-sm text-muted">{exp.summary}</p>
 

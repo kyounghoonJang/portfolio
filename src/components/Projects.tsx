@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { motion } from "motion/react";
 import { projects, type Project } from "@/data/portfolio";
 import { AxelDiagram } from "./AxelDiagram";
+import { PulseDiagram } from "./PulseDiagram";
+import { MigrationDiagram } from "./MigrationDiagram";
 
 export function Projects() {
   return (
@@ -101,23 +103,22 @@ function ProjectCard({
           {project.consideration && project.consideration.length > 0 && (
             <div className="mt-5">
               <h4 className="text-sm font-medium">설계에서 고려한 점</h4>
-              <div className="mt-1 space-y-2.5 text-sm leading-relaxed text-muted">
+              <div className="mt-2 space-y-3.5">
                 {project.consideration.map((c, i) => (
-                  <p key={i}>{c}</p>
+                  <div key={i}>
+                    <p className="text-sm text-foreground">{c.title}</p>
+                    <p className="mt-0.5 text-sm leading-relaxed text-muted">
+                      {c.body}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
           )}
 
           {project.diagram === "axel" && <AxelDiagram />}
-
-          {project.details && project.details.length > 0 && (
-            <ul className="mt-5 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted marker:text-muted">
-              {project.details.map((d, i) => (
-                <li key={i}>{d}</li>
-              ))}
-            </ul>
-          )}
+          {project.diagram === "pulse" && <PulseDiagram />}
+          {project.diagram === "migration" && <MigrationDiagram />}
 
           <ul className="mt-6 flex flex-wrap gap-2 border-t border-border pt-4">
             {project.tags.map((tag) => (
