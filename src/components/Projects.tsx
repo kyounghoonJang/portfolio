@@ -88,21 +88,34 @@ function ProjectCard({
             </button>
           </div>
 
-          {(
-            [
-              ["문제", project.problem],
-              ["한 일", project.work],
-            ] as const
-          ).map(([label, body]) => (
-            <div key={label} className="mt-5">
-              <h4 className="text-sm font-medium">{label}</h4>
-              <p className="mt-1 text-sm leading-relaxed text-muted">{body}</p>
+          <div className="mt-5">
+            <h4 className="text-sm font-medium">문제</h4>
+            <p className="mt-1 text-sm leading-relaxed text-muted">
+              {project.problem}
+            </p>
+          </div>
+
+          <div className="mt-5">
+            <h4 className="text-sm font-medium">한 일</h4>
+            <ul className="mt-1.5 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted">
+              {project.work.map((w, i) => (
+                <li key={i}>{w}</li>
+              ))}
+            </ul>
+          </div>
+
+          {project.result && (
+            <div className="mt-5">
+              <h4 className="text-sm font-medium">결과</h4>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                {project.result}
+              </p>
             </div>
-          ))}
+          )}
 
           {project.consideration && project.consideration.length > 0 && (
             <div className="mt-5">
-              <h4 className="text-sm font-medium">설계에서 고려한 점</h4>
+              <h4 className="text-sm font-medium">설계 결정</h4>
               <div className="mt-2 space-y-3.5">
                 {project.consideration.map((c, i) => (
                   <div key={i}>

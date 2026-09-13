@@ -106,62 +106,44 @@ export type Project = {
   summary: string; // 카드 앞면에 보이는 한 줄
   // 아래는 카드를 클릭하면 열리는 상세 내용입니다.
   problem: string; // 왜 만들었나
-  work: string; // 뭘 설계하고 구현했나
-  consideration?: { title: string; body: string }[]; // 설계에서 고려한 점
+  work: string[]; // 뭘 설계하고 구현했나 (경력처럼 불릿으로)
+  result?: string; // 그래서 무엇이 가능해졌나
+  consideration?: { title: string; body: string }[]; // 설계 결정
   diagram?: "axel" | "pulse" | "migration"; // 모달 안에 아키텍처 그림을 넣을 때
   tags: string[];
 };
 
 export const projects: Project[] = [
   {
-    title: "AXEL — 사내 지식 검색 시스템",
-    org: "에이플랫폼 2026",
-    summary:
-      "흩어진 사내 문서 기반 사내 검색 시스템.",
-    problem:
-      "사내 정보가 Notion · Google Chat 등에 흩어져 있어, 필요한 내용을 찾으려면 그게 어디에 있는지부터 알아야 했습니다.",
-    work: "Notion · Google Chat의 원본 변경을 webhook으로 감지해 문서 생성을 트리거하고, Extractor · Router · Merger로 역할을 나눈 에이전트들이 이를 OKF 문서로 만드는 파이프라인을 설계했습니다. 검색용 메타데이터는 llms.txt로 구성했고, Search Agent가 llms.txt를 먼저 읽어 필요한 OKF 문서만 탐색해 답변합니다. 수집부터 에이전트, 웹 UI까지 전 과정을 직접 설계하고 개발했습니다.",
-    consideration: [
-      {
-        title: "청크 유사도 대신 문서 사이의 관계를 따라가게 했습니다",
-        body: "사내 문서는 한 건만 봐서는 답이 나오지 않고, 연결된 다른 문서까지 따라가야 하는 경우가 많았습니다. 질문과 표면적으로 비슷한 청크를 뽑는 유사도 검색만으로는 그 연결을 따라갈 수 없다고 판단해, 문서 사이의 관계와 메타데이터를 함께 표현하는 OKF 포맷으로 문서를 구성하고 Search Agent에 탐색 도구를 주어 필요한 문서를 스스로 따라가며 찾게 했습니다.",
-      },
-      {
-        title: "탐색의 진입점으로 llms.txt를 두었습니다",
-        body: "llms.txt를 먼저 읽어 후보를 좁힌 뒤 본문을 봅니다. 같은 형식이면 외부 문서도 그대로 붙일 수 있어, SingleStore 공식 문서의 llms.txt까지 참조 대상으로 확장해 제품 관련 질문도 같은 경로로 답합니다.",
-      },
-      {
-        title: "경량 모델에 맞춰 에이전트마다 역할을 하나씩만 맡겼습니다",
-        body: "문서 생성 단계는 원본을 정리하고 분류해 문서로 만드는 작업이라 비싼 모델이 필요하지 않다고 판단해, Extractor · Router · Merger를 모두 경량 모델로 구성했습니다. 대신 작은 모델일수록 한 번에 주는 지시가 늘면 지시 준수율이 떨어지기 때문에, 역할을 하나로 제한해 한 번에 판단해야 할 범위를 좁혔습니다.",
-      },
-    ],
-    diagram: "axel",
-    tags: ["Python", "LLM Agent", "OpenRouter"],
-  },
-  {
     title: "Pulse & Collector — SingleStore 모니터링 제품",
-    org: "에이플랫폼 2025",
+    org: "에이플랫폼 · 2025 · 설계·개발 전담",
     summary:
       "SingleStore 성능 지표를 주기적으로 수집해 저장하고, 대시보드와 리포트로 확인하는 모니터링 제품.",
     problem:
       "SingleStore의 시스템 뷰 중에는 값을 누적해 두는 것도 있지만, 조회한 그 순간의 상태만 보여주고 잠시 뒤면 사라지는 것도 있습니다. 정작 문제가 터진 뒤에 들어가 보면 그 지표가 이미 없어서, 원인을 분석하기 어려웠습니다.",
-    work: "Information Schema의 시스템 뷰에서 성능 지표를 주기적으로 수집하고 저장하는 구조를 설계했습니다. Pulse는 단일 DB를 대상으로 지표 수집, 로컬 저장, CLI 조회, 리포트 생성을 처리합니다. 여러 DB를 함께 봐야 할 때는 Collector가 각 Pulse와 Prometheus Exporter 등의 데이터를 한 DB로 모으고, Grafana에서 통합해 보여줍니다.",
+    work: [
+      "약 130개 Information Schema 시스템 뷰를 대상으로, 데이터 특성에 따라 최단 30초 주기로 수집하고 7~30일간 보관하도록 구성",
+      "Pulse는 단일 DB의 지표 수집부터 로컬 저장, CLI 조회, 리포트 생성까지 처리",
+      "Collector는 여러 Pulse와 Prometheus Exporter의 데이터를 한 DB로 통합해 Grafana에서 조회",
+    ],
+    result:
+      "순간적으로 사라지던 시스템 지표를 이력으로 보존해, 장애 발생 이후에도 당시 성능 상태를 분석할 수 있게 했습니다.",
     consideration: [
       {
         title: "뷰별로 수집 주기를 다르게 잡았습니다",
-        body: "각 시스템 뷰마다 데이터가 유지되는 시간과 한 번에 조회되는 양이 다릅니다. 사라지기 전에 잡아야 하는 뷰는 주기를 짧게, 조회 비용이 큰 뷰는 상대적으로 길게 잡았습니다. 수집 대상 뷰를 하나씩 확인해 정했습니다.",
+        body: "사라지기 전에 확보해야 하지만 자주 조회할수록 소스 DB에 부담이 가서, 뷰마다 유지 시간과 조회량을 확인해 주기를 정했습니다.",
       },
       {
         title: "로컬 저장소로 DuckDB를 선택했습니다",
-        body: "Pulse를 별도의 DB 서버 없이 설치해서 쓸 수 있게 하고 싶었습니다. 수집 데이터가 계속 쌓이는 구조라 컬럼 기반 압축이 되고, 파일에 저장한 데이터를 SQL로 바로 조회할 수 있는 DuckDB가 맞았습니다. 저장과 CLI 조회가 파일 하나에서 끝납니다.",
+        body: "DuckDB의 MySQL Extension으로 SingleStore에 직접 연결하고, 수집한 지표를 별도 DB 서버 없이 압축된 로컬 파일로 저장하면서 같은 파일을 SQL로 바로 조회할 수 있어서 선택했습니다.",
       },
       {
         title: "공통 관리 작업은 Master Pulse에 모았습니다",
-        body: "여러 Pulse가 지표 수집을 나눠 처리하고, 보관 기간이 지난 데이터 정리나 전체 상태 확인처럼 한 곳에서만 해야 하는 작업은 Master Pulse가 맡습니다. 역할이 고정되어 있어 별도의 관리 구조 없이 단순하게 운영할 수 있습니다.",
+        body: "프로세스가 두어 개인 규모라 별도 조정 계층을 두기보다 역할을 고정하는 편이 단순했습니다.",
       },
       {
         title: "수집 주기를 고려해 프로세스별 부하를 나눴습니다",
-        body: "수집 대상마다 주기가 달라서, 단순히 대상 개수만 같게 나누면 특정 프로세스에 작업이 몰릴 수 있습니다. 기동 시 각 대상의 수집 주기를 기준으로 작업을 분배해 Pulse별 수집 부하가 한쪽으로 치우치지 않게 했습니다.",
+        body: "대상 개수만 같게 나누면 주기가 짧은 작업이 한쪽에 몰리기 때문에, 기동 시 주기를 기준으로 분배합니다.",
       },
     ],
     diagram: "pulse",
@@ -169,12 +151,16 @@ export const projects: Project[] = [
   },
   {
     title: "SingleStore 마이그레이션 도구",
-    org: "에이플랫폼 2025",
+    org: "에이플랫폼 · 2025 · 설계·개발 전담",
     summary:
       "작업 스케줄에 따라 여러 소스 DB의 데이터를 SingleStore로 이관하고, 실패한 지점부터 다시 이어갈 수 있는 도구.",
     problem:
       "대량 데이터를 한 번에 이관하면 작업 중간에 실패했을 때 진행 상태를 확인하거나 특정 구간부터 다시 시작하기 어려웠습니다. 운영 중인 DB에서는 이관 작업 자체가 부하가 되기 때문에 실행 시간과 작업량도 조절해야 했습니다.",
-    work: "DB에 등록된 작업 스케줄을 기반으로 데이터를 여러 배치로 나누고, Airflow가 각 배치의 실행과 진행 상태를 관리합니다. 실제 데이터 전송은 Embulk가 담당하며, 작업이 중단되면 완료된 배치는 건너뛰고 실패한 구간부터 다시 실행합니다.",
+    work: [
+      "DB에 등록된 작업 스케줄을 기반으로 데이터를 여러 배치로 분할",
+      "Airflow가 각 배치의 실행과 진행 상태를 관리하고, 실제 전송은 Embulk가 담당",
+      "작업이 중단되면 완료된 배치는 건너뛰고 실패한 구간부터 재실행",
+    ],
     consideration: [
       {
         title: "범위 단위로 데이터를 나눠 이관했습니다",
@@ -191,6 +177,38 @@ export const projects: Project[] = [
     ],
     diagram: "migration",
     tags: ["Airflow", "Embulk", "SingleStore"],
+  },
+  {
+    title: "AXEL — 사내 지식 검색 시스템",
+    org: "에이플랫폼 · 2026 · 설계·개발 전담",
+    summary:
+      "흩어진 사내 문서 기반 사내 검색 시스템.",
+    problem:
+      "사내 정보가 Notion · Google Chat 등에 흩어져 있어 저장 위치를 알아야 했고, 검색하더라도 원하는 정보를 정확히 찾기 어려웠습니다.",
+    work: [
+      "수집부터 에이전트, 웹 UI까지 전 과정을 설계하고 개발",
+      "Notion과 Google Chat의 원본 변경을 webhook으로 감지해 문서 생성을 트리거",
+      "Extractor, Router, Merger로 역할을 나눈 에이전트가 원본을 OKF 문서로 생성",
+      "검색용 메타데이터를 llms.txt로 구성하고, Search Agent가 이를 먼저 읽어 필요한 문서만 탐색",
+    ],
+    result:
+      "사용자는 문서가 어디에 있는지, 어떤 검색어를 써야 하는지 몰라도 한 화면에서 질문해 관련 사내 문서를 찾을 수 있게 됐습니다.",
+    consideration: [
+      {
+        title: "청크 유사도 대신 문서 사이의 관계를 따라가게 했습니다",
+        body: "사내 문서는 한 건만 봐서는 답이 나오지 않고, 연결된 다른 문서까지 따라가야 하는 경우가 많았습니다. 질문과 표면적으로 비슷한 청크를 뽑는 유사도 검색만으로는 그 연결을 따라갈 수 없다고 판단해, 문서 사이의 관계와 메타데이터를 함께 표현하는 OKF 포맷으로 문서를 구성하고 Search Agent에 탐색 도구를 주어 필요한 문서를 스스로 따라가며 찾게 했습니다.",
+      },
+      {
+        title: "탐색의 진입점으로 llms.txt를 두었습니다",
+        body: "llms.txt를 먼저 읽어 후보를 좁힌 뒤 본문을 봅니다. 같은 형식이면 외부 문서도 그대로 붙일 수 있어, SingleStore 공식 문서의 llms.txt까지 참조 대상으로 확장해 제품 관련 질문도 같은 경로로 답합니다.",
+      },
+      {
+        title: "경량 모델에 맞춰 에이전트마다 역할을 하나씩만 맡겼습니다",
+        body: "문서 생성 단계는 원본을 정리하고 분류해 문서로 만드는 작업이라 비싼 모델이 필요하지 않다고 판단해, Extractor · Router · Merger를 모두 경량 모델로 구성했습니다. 대신 작은 모델일수록 한 번에 주는 지시가 늘면 지시 준수율이 떨어지기 때문에, 역할을 하나로 제한해 한 번에 판단해야 할 범위를 좁혔습니다.",
+      },
+    ],
+    diagram: "axel",
+    tags: ["Python", "LLM Agent", "OpenRouter"],
   },
 ];
 
@@ -410,3 +428,52 @@ export const openSource: OpenSource[] = contributions.projects
   };
   })
   .filter((p) => p.prs.length > 0);
+
+const featuredOpenSourceConfig = [
+  {
+    project: "Cilium",
+    blurb:
+      "CiliumPodIPPool v2 API를 도입하고 ReservedRange를 확장한 뒤, 기존 저장 버전을 v2로 전환할 수 있도록 완성했습니다.",
+    prUrls: [
+      "https://github.com/cilium/cilium/pull/44383",
+      "https://github.com/cilium/cilium/pull/46880",
+      "https://github.com/cilium/cilium/pull/48411",
+    ],
+  },
+  {
+    project: "Podman",
+    blurb:
+      "podman volume prune 실행 전에 삭제 대상을 확인할 수 있는 --dry-run 기능을 추가했습니다.",
+    prUrls: [
+      "https://github.com/podman-container-tools/podman/pull/28673",
+    ],
+  },
+] as const;
+
+const featuredPrUrls = new Set<string>(
+  featuredOpenSourceConfig.flatMap(({ prUrls }) => prUrls),
+);
+
+export const featuredOpenSource: OpenSource[] = featuredOpenSourceConfig.flatMap(
+  ({ project, blurb, prUrls }) => {
+    const source = openSource.find((item) => item.project === project);
+    if (!source) return [];
+
+    return [{
+      ...source,
+      blurb,
+      prs: prUrls.flatMap((url) => {
+        const pr = source.prs.find((item) => item.url === url);
+        return pr ? [pr] : [];
+      }),
+      relatedPosts: undefined,
+    }];
+  },
+);
+
+export const otherOpenSource: OpenSource[] = openSource
+  .map((item) => ({
+    ...item,
+    prs: item.prs.filter((pr) => !featuredPrUrls.has(pr.url)),
+  }))
+  .filter((item) => item.prs.length > 0);
