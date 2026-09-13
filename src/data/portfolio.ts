@@ -99,6 +99,68 @@ export const experiences: Experience[] = [
   },
 ];
 
+export type Project = {
+  title: string;
+  org: string; // 소속 · 시기 (예: "에이플랫폼 · 2025")
+  summary: string; // 카드 앞면에 보이는 한 줄
+  // 아래는 카드를 클릭하면 열리는 상세 내용입니다.
+  problem: string; // 왜 만들었나
+  work: string; // 뭘 설계·구현했나
+  consideration?: string[]; // 설계에서 고려한 점 (문단별로 나눠 적습니다)
+  details?: string[]; // 더 적을 게 있으면 불릿으로
+  diagram?: "axel"; // 모달 안에 아키텍처 그림을 넣을 때
+  tags: string[];
+};
+
+export const projects: Project[] = [
+  {
+    title: "AXEL — 사내 지식 검색 시스템",
+    org: "에이플랫폼 · 2026",
+    summary:
+      "흩어진 사내 문서를 모으는 수집 파이프라인부터 검색 에이전트와 웹 UI 까지 혼자 설계·개발한 사내 검색 시스템.",
+    problem:
+      "사내 정보가 Notion · Google Chat 등에 흩어져 있어, 필요한 내용을 찾으려면 그게 어디에 있는지부터 알아야 했습니다.",
+    work: "Notion · Google Chat 의 원본 변경을 webhook 으로 감지해 문서 생성을 트리거하고, Extractor · Router · Merger 로 역할을 나눈 에이전트들이 이를 OKF 문서로 만들도록 파이프라인을 설계했습니다. 검색용 메타데이터는 llms.txt 로 구성했고, Search Agent 가 llms.txt 를 먼저 읽어 필요한 OKF 문서만 탐색해 답변하도록 했습니다. 수집부터 에이전트, 웹 UI 까지 전 과정을 직접 설계·개발했습니다.",
+    consideration: [
+      "사내 문서는 한 건만 봐서는 답이 나오지 않고, 연결된 다른 문서까지 따라가야 하는 경우가 많았습니다. 질문과 표면적으로 비슷한 청크를 뽑는 유사도 검색만으로는 그 연결을 따라갈 수 없다고 판단해, 문서 사이의 관계와 메타데이터를 함께 표현하는 OKF 포맷으로 문서를 구성하고 Search Agent 에 탐색 도구를 주어 필요한 문서를 스스로 따라가며 찾도록 했습니다.",
+      "탐색의 진입점으로는 llms.txt 를 두어 후보를 먼저 좁히게 했습니다. 같은 형식이면 외부 문서도 그대로 붙일 수 있어, SingleStore 공식 문서의 llms.txt 까지 참조 대상으로 확장해 제품 관련 질문도 같은 경로로 답하도록 했습니다.",
+      "문서 생성 단계는 원본을 정리하고 분류해 문서로 만드는 작업이라 비싼 모델이 필요하지 않다고 판단해, Extractor · Router · Merger 를 모두 경량 모델로 구성했습니다. 대신 작은 모델일수록 한 번에 주는 지시가 늘면 지시 준수율이 떨어지기 때문에, 에이전트마다 역할을 하나씩만 맡겨 각 프롬프트를 짧고 단순하게 유지했습니다.",
+    ],
+    diagram: "axel",
+    tags: ["Python", "LLM Agent", "OpenRouter"],
+  },
+  {
+    title: "Pulse — DB 모니터링 플랫폼",
+    org: "에이플랫폼 · 2025",
+    summary:
+      "SingleStore 성능 지표를 수집해 대시보드와 정기 리포트까지 잇는 사내 모니터링 플랫폼.",
+    problem:
+      "DB 성능 지표가 여러 곳에 흩어져 있어, 이슈가 생겨도 원인을 추적할 기준 데이터가 없었습니다.",
+    work: "Information Schema 기반 지표 수집·저장 구조와 플랫폼 아키텍처를 설계하고, Python Collector 와 Grafana 대시보드, 정기 리포트 자동 생성까지 구현했습니다.",
+    details: [
+      "수집 주기와 보관 기간을 지표 성격에 따라 나눠 저장 비용과 조회 성능의 균형을 맞춤",
+      "Grafana 대시보드를 고객사별로 분리해 동일한 Collector 로 여러 환경을 커버",
+      "정기 리포트를 자동 생성해 수동 집계 작업을 제거",
+    ],
+    tags: ["Python", "SingleStore", "Grafana"],
+  },
+  {
+    title: "Airflow 기반 이기종 DB 마이그레이션 도구",
+    org: "에이플랫폼 · 2025",
+    summary:
+      "작업 스케줄에 따라 데이터를 배치 단위로 이관하고, 실패한 지점부터 다시 이어갈 수 있는 마이그레이션 도구.",
+    problem:
+      "대량 데이터를 한 번에 옮기다 실패하면 어디까지 진행됐는지 알 수 없어 처음부터 다시 시작해야 했습니다.",
+    work: "DB에 등록된 작업 스케줄을 읽어 배치 단위로 데이터를 이관하는 Airflow 기반 도구를 설계·개발했습니다. 배치별 진행 상태를 기록해 실패한 구간만 재시도하고, 중단된 지점부터 재개할 수 있도록 구성했습니다.",
+    details: [
+      "Oracle Function 및 DDL 을 SingleStore 호환 구조로 변환하고 기능·데이터 정합성을 검증",
+      "Apache Spark 기반 처리 로직을 SingleStore SQL 로 전환하고 함수 로직을 CTE 로 재설계",
+      "전환 전후 결과를 비교해 이기종 데이터베이스 마이그레이션 호환성을 검증",
+    ],
+    tags: ["Airflow", "Python", "SingleStore"],
+  },
+];
+
 export type Education = {
   school: string;
   degree: string;

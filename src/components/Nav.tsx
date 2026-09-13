@@ -7,6 +7,7 @@ import { ThemeToggle } from "./ThemeToggle";
 const links = [
   { href: "about", label: "소개" },
   { href: "experience", label: "경력" },
+  { href: "projects", label: "프로젝트" },
   { href: "opensource", label: "오픈소스" },
   { href: "skills", label: "기술" },
   { href: "blog", label: "블로그" },

@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Section } from "@/components/Section";
 import { Experience } from "@/components/Experience";
 import { OpenSource } from "@/components/OpenSource";
+import { Projects } from "@/components/Projects";
 import { Certifications } from "@/components/Certifications";
 import { Blog } from "@/components/Blog";
 import {
@@ -28,6 +29,10 @@ export default function Home() {
 
         <Section id="experience" title="Experience">
           <Experience />
+        </Section>
+
+        <Section id="projects" title="Projects">
+          <Projects />
         </Section>
 
         <Section id="opensource" title="Open Source">
