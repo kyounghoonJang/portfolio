@@ -297,6 +297,10 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
     displayName: "Traefik",
     blurb: "클라우드 네이티브 리버스 프록시 / 로드밸런서",
     tags: ["Go", "Networking", "Proxy"],
+    notes: {
+      "https://github.com/traefik/traefik/pull/12293":
+        "forward auth 미들웨어에서 로그인 페이지 주소를 따로 지정할 수 있게 했습니다",
+    },
   },
   "apache/airflow": {
     displayName: "Apache Airflow",
@@ -304,11 +308,11 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
     tags: ["Python", "Data", "Workflow"],
     notes: {
       "https://github.com/apache/airflow/pull/58023":
-        "FAB Provider의 Role PATCH API를 Flask/Connexion에서 FastAPI로 마이그레이션 (서비스 로직과 응답 테스트 포함).",
+        "FAB Provider의 역할 수정 API를 Flask에서 FastAPI로 마이그레이션했습니다",
       "https://github.com/apache/airflow/pull/58009":
-        "FAB Provider의 Role GET API를 FastAPI로 마이그레이션.",
+        "FAB Provider의 역할 조회 API를 FastAPI로 마이그레이션했습니다",
       "https://github.com/apache/airflow/pull/57780":
-        "FAB Provider의 Role DELETE API를 FastAPI로 마이그레이션.",
+        "FAB Provider의 역할 삭제 API를 FastAPI로 마이그레이션했습니다",
     },
   },
   "podman-container-tools/podman": {
@@ -317,9 +321,13 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
     tags: ["Go", "Containers", "CLI"],
     notes: {
       "https://github.com/podman-container-tools/podman/pull/28673":
-        "삭제 전 어떤 볼륨이 정리될지 미리 보여주는 --dry-run 옵션 추가 (local·remote 모두 지원).",
+        "삭제 전에 어떤 볼륨이 정리될지 미리 보여주는 --dry-run 옵션을 추가했습니다",
       "https://github.com/podman-container-tools/podman/pull/28391":
-        "존재하지 않는 네트워크 삭제 시 exit 1 대신 success 반환 — Docker CLI와의 동작 일관성 확보 (#28363).",
+        "없는 네트워크를 지울 때 오류 대신 성공으로 끝내는 --ignore 옵션을 추가했습니다",
+      "https://github.com/podman-container-tools/podman/pull/28265":
+        "서버에 연결되지 않아도 podman version이 클라이언트 정보는 출력하게 했습니다",
+      "https://github.com/podman-container-tools/podman/pull/27608":
+        "podman info에 기본 네트워크 이름을 노출했습니다",
     },
     relatedPosts: [
       {
@@ -327,7 +335,7 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
         url: "https://codingjang.tistory.com/89",
       },
       {
-        label: "Deep Dive 1편: podman run은 어떻게 동작할까?",
+        label: "Deep Dive 1편: podman run 은 어떻게 동작할까?",
         url: "https://codingjang.tistory.com/90",
       },
     ],
@@ -337,10 +345,14 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
     blurb: "eBPF 기반 쿠버네티스 네트워킹과 보안 (CNCF Graduated)",
     tags: ["Go", "eBPF", "Kubernetes"],
     notes: {
+      "https://github.com/cilium/cilium/pull/48411":
+        "CiliumPodIPPool의 저장 버전 마이그레이션을 가능하게 했습니다",
+      "https://github.com/cilium/cilium/pull/46880":
+        "풀에서 미리 떼어 둘 IP 구간을 지정하는 ReservedRange를 추가했습니다",
       "https://github.com/cilium/cilium/pull/44383":
-        "Multi-Pool IPAM을 위한 CiliumPodIPPool v2 API 신규 추가 — CRD 스키마와 검증, codegen 포함 (+1,000여 줄, 16개 파일).",
+        "Multi-Pool IPAM을 위한 CiliumPodIPPool v2 API를 새로 추가했습니다",
       "https://github.com/cilium/cilium/pull/41949":
-        "Hubble 흐름 관측에 VRRP·IGMP 프로토콜 파싱 지원 추가.",
+        "Hubble 흐름 관측에 VRRP와 IGMP 프로토콜 파싱을 추가했습니다",
     },
     relatedPosts: [
       { label: "[Network] VRRP Protocol", url: "https://codingjang.tistory.com/88" },
@@ -350,14 +362,28 @@ const openSourceMeta: Record<string, OpenSourceMeta> = {
     displayName: "floci",
     blurb: "가볍고 무료인 AWS 로컬 에뮬레이터",
     tags: ["AWS", "Cloud", "Java"],
+    notes: {
+      "https://github.com/floci-io/floci/pull/1042":
+        "KMS 키 수동 회전의 횟수 제한 처리를 추가했습니다",
+      "https://github.com/floci-io/floci/pull/990":
+        "필요할 때 직접 키를 회전시키는 RotateKeyOnDemand 지원을 추가했습니다",
+    },
   },
   "openbao/openbao": {
     displayName: "OpenBao",
     blurb: "HashiCorp Vault 기반 오픈소스 시크릿 관리 (Linux Foundation)",
     tags: ["Go", "Secrets", "Security"],
     notes: {
+      "https://github.com/openbao/openbao/pull/2153":
+        "agent, proxy, migrate의 설정 파일 경로를 환경 변수로 지정하는 방법을 추가했습니다",
+      "https://github.com/openbao/openbao/pull/1959":
+        "Valkey 시크릿 엔진이 creation_statements를 문자열 배열로 제대로 읽지 못하던 문제를 고쳤습니다",
+      "https://github.com/openbao/openbao/pull/1923":
+        "Valkey 연결 설정을 connection_url 한 줄로 받게 했습니다",
+      "https://github.com/openbao/openbao/pull/1868":
+        "외부 검증 라이브러리 govalidator 의존성을 제거했습니다",
       "https://github.com/openbao/openbao/pull/1834":
-        "리스너별 메트릭 노출 제어 옵션 추가 — 모니터링 전용 포트를 분리해 다른 API 노출 없이 메트릭만 제공 (보안 강화, #1704).",
+        "리스너별로 메트릭만 노출하거나 메트릭을 막을 수 있는 옵션을 추가했습니다",
     },
   },
 };
